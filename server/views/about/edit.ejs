@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Edit About Info</title>
+
+    <!-- Fonts and Styles -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900"
+      rel="stylesheet"
+    />
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <%- include('../layout/sideber.ejs') %>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <!-- Topbar -->
+          <%- include('../layout/navber.ejs') %>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Edit About Info</h1>
+
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <% if (typeof errorMessage !== "undefined" &&
+                errorMessage.length > 0) { %>
+                <div class="alert alert-danger"><%= errorMessage %></div>
+                <% } %>
+
+                <form
+                  action="/about/update/<%= data._id %>"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group">
+                    <label for="title">Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      class="form-control"
+                      value="<%= data.title %>"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="subtitle">Sub Title</label>
+                    <input
+                      type="text"
+                      name="subtitle"
+                      id="subtitle"
+                      class="form-control"
+                      value="<%= data.subtitle %>"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                      name="description"
+                      id="description"
+                      rows="5"
+                      class="form-control"
+                      required
+                    >
+<%= data.description %></textarea
+                    >
+                  </div>
+
+                  <div class="form-group">
+                    <label>Current Image</label><br />
+                    <img
+                      src="/<%= data.image %>"
+                      alt="About Image"
+                      height="100px"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="image">Change Image (optional)</label>
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      class="form-control-file"
+                      accept="image/*"
+                    />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Update</button>
+                  <a href="/about/list" class="btn btn-secondary">Cancel</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../layout/footer.ejs') %>
+      </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+  </body>
+</html>

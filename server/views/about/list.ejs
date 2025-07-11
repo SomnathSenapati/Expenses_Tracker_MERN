@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>About</title>
+
+    <!-- Custom fonts -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900" rel="stylesheet" />
+
+    <!-- Custom styles -->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <%- include('../layout/sideber.ejs') %>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <!-- Topbar -->
+          <%- include('../layout/navber.ejs') %>
+          <!-- End of Topbar -->
+
+          <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800">About</h1>
+
+            <!-- Add Button -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <a href="/about/add" class="btn btn-success">Add About Info</a>
+              </div>
+
+              <% if (!data || data.length === 0) { %>
+                <p class="text-center text-danger mt-3">No data found</p>
+              <% } else { %>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Title</th>
+                          <th>Sub Title</th>
+                          <th>Description</th>
+                          <th>Image</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% data.forEach((item, index) => { %>
+                          <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= item.title %></td>
+                            <td><%= item.subtitle %></td>
+                            <td><%= item.description.substring(0, 100) %>...</td>
+                            <td>
+                              <img src="/<%= item.image %>" alt="image" height="100" width="100" />
+                            </td>
+                            <td>
+                              <a href="/about/edit/<%= item._id %>" class="btn btn-success btn-sm">Edit</a>
+                              <a href="/about/delete/<%= item._id %>" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../layout/footer.ejs') %>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- JS Scripts -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/js/demo/datatables-demo.js"></script>
+  </body>
+</html>

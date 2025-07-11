@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Contact</title>
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
+  </head>
+  <body id="page-top">
+    <div id="wrapper">
+      <%- include('../layout/sideber.ejs') %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <%- include('../layout/navber.ejs') %>
+
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Edit Contact Info</h1>
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <form action="/contact/update/<%= data._id %>" method="POST">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" value="<%= data.email %>" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" name="phone" class="form-control" value="<%= data.phone %>" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Address</label>
+                    <textarea name="address" rows="3" class="form-control" required><%= data.address %></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                  <a href="/contact/list" class="btn btn-secondary">Cancel</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <%- include('../layout/footer.ejs') %>
+      </div>
+    </div>
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+  </body>
+</html>

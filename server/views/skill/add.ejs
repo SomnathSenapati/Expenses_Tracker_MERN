@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Skill</title>
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900" rel="stylesheet" />
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <%- include('../layout/sideber.ejs') %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <%- include('../layout/navber.ejs') %>
+
+          <!-- Page Content -->
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Add Skill</h1>
+
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <% if (typeof errorMessage !== "undefined" && errorMessage.length > 0) { %>
+                  <div class="alert alert-danger"><%= errorMessage %></div>
+                <% } %>
+
+                <form action="/skills/add" method="POST">
+                  <div class="form-group">
+                    <label for="name">Skill Name</label>
+                    <input type="text" name="name" class="form-control" required placeholder="e.g. JavaScript" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" class="form-control" required>
+                      <option value="">Select Category</option>
+                      <option value="Frontend">Frontend</option>
+                      <option value="Backend">Backend</option>
+                      <option value="Database">Database</option>
+                      <option value="DevOps">DevOps</option>
+                      <option value="Tool">Tool</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="level">Level</label>
+                    <select name="level" class="form-control" required>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate" selected>Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Expert">Expert</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Add Skill</button>
+                  <a href="/skills/list" class="btn btn-secondary">Cancel</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <%- include('../layout/footer.ejs') %>
+      </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+  </body>
+</html>

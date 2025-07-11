@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Experience</title>
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
+  </head>
+  <body id="page-top">
+    <div id="wrapper">
+      <%- include('../layout/sideber.ejs') %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <%- include('../layout/navber.ejs') %>
+          <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Edit Experience</h1>
+
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <form action="/experience/update/<%= data._id %>" method="POST">
+                  <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" name="position" class="form-control" value="<%= data.position %>" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" name="company" class="form-control" value="<%= data.company %>" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" class="form-control" value="<%= data.location %>" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" name="startDate" class="form-control" value="<%= data.startDate.toISOString().slice(0,10) %>" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" name="endDate" class="form-control" value="<%= data.endDate ? data.endDate.toISOString().slice(0,10) : '' %>" />
+                    <small class="text-muted">Leave blank if currently working</small>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" class="form-control"><%= data.description %></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Update Experience</button>
+                  <a href="/experience/list" class="btn btn-secondary">Cancel</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include('../layout/footer.ejs') %>
+      </div>
+    </div>
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/sb-admin-2.min.js"></script>
+  </body>
+</html>
