@@ -26,14 +26,14 @@ const HeroSection = () => {
           </button>
           <button className="btn-secondary">View Demo</button>
         </div>
-        <div className="brands">
+        {/* <div className="brands">
           <img src="/brands/severin.png" alt="brand" />
           <img src="/brands/canali.png" alt="brand" />
           <img src="/brands/praxair.png" alt="brand" />
           <img src="/brands/solarcity.png" alt="brand" />
           <img src="/brands/connex.png" alt="brand" />
           <img src="/brands/brickworks.png" alt="brand" />
-        </div>
+        </div> */}
       </div>
       <div className="hero-analytics">
         <img src="hero.png" alt="brand" />

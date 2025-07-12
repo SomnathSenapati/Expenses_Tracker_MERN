@@ -1,0 +1,11 @@
+const express=require('express')
+const HomeController = require('../../controllers/admin/HomeController')
+const router=express.Router()
+
+router.get("/list", HomeController.List);
+// router.post('/add',HomeController.createabout)
+// router.get('/edit/:id',HomeController.edit)
+// router.post('/update/:id',HomeController.update)
+// router.get('/delete/:id',HomeController.delete)
+
+module.exports = router

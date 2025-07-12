@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Project List</title>
+    <title>Pricing Plans</title>
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -15,14 +15,14 @@
           <%- include('../layout/navber.ejs') %>
 
           <div class="container-fluid">
-            <h1 class="h3 mb-4 text-gray-800">Projects</h1>
+            <h1 class="h3 mb-4 text-gray-800">Pricing Plans</h1>
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <a href="/project/add" class="btn btn-success">Add Project</a>
+                <a href="/pricing/add" class="btn btn-success">Add Pricing Plan</a>
               </div>
 
               <% if (!data || data.length === 0) { %>
-                <p class="text-center text-danger mt-3">No project data found</p>
+                <p class="text-center text-danger mt-3">No pricing plans found</p>
               <% } else { %>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -30,12 +30,12 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Title</th>
-                          <th>Description</th>
-                          <th>Technologies</th>
-                          <th>Live URL</th>
-                          <th>GitHub</th>
-                          <th>Image</th>
+                          <th>Name</th>
+                          <th>Price</th>
+                          <th>Features</th>
+                          <th>Popular</th>
+                          <th>CTA Button</th>
+                          <th>Status</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -43,39 +43,37 @@
                         <% data.forEach((item, index) => { %>
                           <tr>
                             <td><%= index + 1 %></td>
-                            <td><%= item.title %></td>
-                            <td><%= item.description %></td>
+                            <td><%= item.name %></td>
+                            <td><%= item.price %></td>
                             <td>
-                              <% if (item.technologies && item.technologies.length > 0) { %>
-                                <%= item.technologies.join(', ') %>
+                              <% if (item.features && item.features.length > 0) { %>
+                                <ul class="mb-0 pl-3">
+                                  <% item.features.forEach(feature => { %>
+                                    <li><%= feature %></li>
+                                  <% }) %>
+                                </ul>
                               <% } else { %>
                                 N/A
                               <% } %>
                             </td>
                             <td>
-                              <% if (item.liveUrl) { %>
-                                <a href="<%= item.liveUrl %>" target="_blank">Live</a>
+                              <% if (item.popular) { %>
+                                <span class="badge badge-warning">Yes</span>
                               <% } else { %>
-                                N/A
+                                <span class="badge badge-secondary">No</span>
+                              <% } %>
+                            </td>
+                            <td><%= item.button || 'N/A' %></td>
+                            <td>
+                              <% if (item.isActive) { %>
+                                <span class="badge badge-success">Active</span>
+                              <% } else { %>
+                                <span class="badge badge-danger">Inactive</span>
                               <% } %>
                             </td>
                             <td>
-                              <% if (item.githubUrl) { %>
-                                <a href="<%= item.githubUrl %>" target="{item.githubUrl}">GitHub</a>
-                              <% } else { %>
-                                N/A
-                              <% } %>
-                            </td>
-                            <td>
-                              <% if (item.image) { %>
-                                <img src="/<%= item.image %>" alt="Project Image" width="60" />
-                              <% } else { %>
-                                N/A
-                              <% } %>
-                            </td>
-                            <td>
-                              <a href="/project/edit/<%= item._id %>" class="btn btn-success btn-sm">Edit</a>
-                              <a href="/project/delete/<%= item._id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                              <a href="/pricing/edit/<%= item._id %>" class="btn btn-success btn-sm">Edit</a>
+                              <a href="/pricing/delete/<%= item._id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
                           </tr>
                         <% }) %>

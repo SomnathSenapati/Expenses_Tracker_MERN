@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Intro</title>
+    <title>Features</title>
 
     <!-- Fonts and Styles -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -32,25 +32,26 @@
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
-            <h1 class="h3 mb-2 text-gray-800">Intro</h1>
+            <h1 class="h3 mb-2 text-gray-800">Features</h1>
 
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <a href="/intro/add" class="btn btn-success">Add Intro</a>
+                <a href="/features/add" class="btn btn-success">Add Feature</a>
               </div>
 
               <div class="card-body">
                 <% if (!data || data.length === 0) { %>
-                  <p class="text-center text-danger">No data found</p>
+                  <p class="text-center text-danger">No feature data found</p>
                 <% } else { %>
                   <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Icon</th>
                           <th>Title</th>
-                          <th>Sub Title</th>
-                          <th>Image</th>
+                          <th>Description</th>
+                          <th>Status</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -58,14 +59,19 @@
                         <% data.forEach((item, index) => { %>
                           <tr>
                             <td><%= index + 1 %></td>
+                            <td style="font-size: 20px;"><%= item.icon %></td>
                             <td><%= item.title %></td>
-                            <td><%= item.subtitle %></td>
+                            <td><%= item.description %></td>
                             <td>
-                              <img src="/<%= item.image %>" alt="Image" height="100" width="100" />
+                              <% if (item.isActive) { %>
+                                <span class="badge badge-success">Active</span>
+                              <% } else { %>
+                                <span class="badge badge-secondary">Inactive</span>
+                              <% } %>
                             </td>
                             <td>
-                              <a href="/intro/edit/<%= item._id %>" class="btn btn-success btn-sm">Edit</a>
-                              <a href="/intro/delete/<%= item._id %>" class="btn btn-danger btn-sm">Delete</a>
+                              <a href="/features/edit/<%= item._id %>" class="btn btn-success btn-sm">Edit</a>
+                              <a href="/features/delete/<%= item._id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this feature?')">Delete</a>
                             </td>
                           </tr>
                         <% }) %>
