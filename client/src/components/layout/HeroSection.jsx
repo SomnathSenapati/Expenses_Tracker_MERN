@@ -1,4 +1,13 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleContactClick = () => {
+    navigate("/contact");
+  };
+
   return (
     <section className="hero">
       <div className="hero-content">
@@ -12,7 +21,9 @@ const HeroSection = () => {
           industry.
         </p>
         <div className="hero-buttons">
-          <button className="btn-primary">Let's Talk</button>
+          <button className="btn-primary" onClick={handleContactClick}>
+            Let's Talk
+          </button>
           <button className="btn-secondary">View Demo</button>
         </div>
         <div className="brands">
