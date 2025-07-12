@@ -36,7 +36,7 @@ class ContactController {
         data: data,
       });
     } catch (error) {
-      res.redirect("/contact/list", { message: error.message });
+      res.redirect("/contact/list");
     }
   }
   async edit(req, res) {
