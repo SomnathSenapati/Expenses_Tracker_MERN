@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Add Education</title>
+    <title>Add Home Content</title>
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
   </head>
@@ -19,7 +19,7 @@
 
           <!-- Main Content -->
           <div class="container-fluid">
-            <h1 class="h3 mb-4 text-gray-800">Add Education</h1>
+            <h1 class="h3 mb-4 text-gray-800">Add Home Section</h1>
 
             <div class="card shadow mb-4">
               <div class="card-body">
@@ -28,40 +28,34 @@
                   <div class="alert alert-danger"><%= errorMessage %></div>
                 <% } %>
 
-                <form action="/education/add" method="POST">
+                <form action="/home/add" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
-                    <label for="degree">Degree</label>
-                    <input type="text" name="degree" class="form-control" required />
+                    <label for="title">Main Title</label>
+                    <input type="text" name="title" class="form-control" required placeholder="e.g. Manage Your Expenses Easily With MoneyMate" />
                   </div>
 
                   <div class="form-group">
-                    <label for="school">Institution</label>
-                    <input type="text" name="school" class="form-control" required />
+                    <label for="subtitle">Subtitle / Description</label>
+                    <textarea name="subtitle" class="form-control" rows="3" required placeholder="Short description..."></textarea>
                   </div>
 
                   <div class="form-group">
-                    <label for="location">Location</label>
-                    <input type="text" name="location" class="form-control" placeholder="e.g. Odisha, India" />
+                    <label for="button1">Primary Button Text</label>
+                    <input type="text" name="button1" class="form-control" placeholder="e.g. Let's Talk" />
                   </div>
 
                   <div class="form-group">
-                    <label for="startDate">Start Date</label>
-                    <input type="date" name="startDate" class="form-control" required />
+                    <label for="button2">Secondary Button Text</label>
+                    <input type="text" name="button2" class="form-control" placeholder="e.g. View Demo" />
                   </div>
 
                   <div class="form-group">
-                    <label for="endDate">End Date</label>
-                    <input type="date" name="endDate" class="form-control" />
-                    <small class="form-text text-muted">Leave blank if ongoing</small>
+                    <label for="image">Hero Image</label>
+                    <input type="file" name="image" class="form-control-file" />
                   </div>
 
-                  <div class="form-group">
-                    <label for="grade">Grade/CGPA</label>
-                    <input type="text" name="grade" class="form-control" placeholder="e.g. 8.5 CGPA or 75%" />
-                  </div>
-
-                  <button type="submit" class="btn btn-primary">Add Education</button>
-                  <a href="/education/list" class="btn btn-secondary">Cancel</a>
+                  <button type="submit" class="btn btn-primary">Add Home Section</button>
+                  <a href="/home/list" class="btn btn-secondary">Cancel</a>
                 </form>
 
               </div>

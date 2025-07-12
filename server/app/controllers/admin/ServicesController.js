@@ -4,7 +4,7 @@ const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
 class ServicesController {
-  async createabout(req, res) {
+  async add(req, res) {
     console.log(req.body);
     console.log(req.file);
 
@@ -22,7 +22,7 @@ class ServicesController {
       }
       const data = await sdata.save();
       if (data) {
-        res.redirect("/about/list");
+        res.redirect("/services/list");
       } else {
         res.redirect("/add");
       }
@@ -99,9 +99,13 @@ class ServicesController {
       }
 
       // Update the about document
-      const updatedabout = await ServicesModel.findByIdAndUpdate(id, updateData, {
-        new: true,
-      });
+      const updatedabout = await ServicesModel.findByIdAndUpdate(
+        id,
+        updateData,
+        {
+          new: true,
+        }
+      );
 
       if (!updatedabout) {
         return res.status(404).json({

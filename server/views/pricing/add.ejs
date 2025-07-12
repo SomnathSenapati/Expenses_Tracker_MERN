@@ -2,115 +2,78 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Add Project</title>
+    <title>Add Pricing Plan</title>
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
   </head>
   <body id="page-top">
     <div id="wrapper">
       <%- include('../layout/sideber.ejs') %>
+
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <%- include('../layout/navber.ejs') %>
+
           <div class="container-fluid">
-            <h1 class="h3 mb-4 text-gray-800">Add Project</h1>
+            <h1 class="h3 mb-4 text-gray-800">Add Pricing Plan</h1>
+
             <div class="card shadow mb-4">
               <div class="card-body">
                 <% if (typeof errorMessage !== 'undefined') { %>
-                <div class="alert alert-danger"><%= errorMessage %></div>
+                  <div class="alert alert-danger"><%= errorMessage %></div>
                 <% } %>
 
-                <form
-                  action="/project/add"
-                  method="POST"
-                  enctype="multipart/form-data"
-                >
+                <form action="/pricing/add" method="POST">
                   <!-- Title -->
                   <div class="form-group">
-                    <label>Title <span class="text-danger">*</span></label>
-                    <input
-                      type="text"
-                      name="title"
-                      class="form-control"
-                      required
-                    />
+                    <label>Plan Title <span class="text-danger">*</span></label>
+                    <input type="text" name="title" class="form-control" required placeholder="e.g. Basic, Pro, Enterprise" />
                   </div>
 
-                  <!-- Description -->
+                  <!-- Price -->
                   <div class="form-group">
-                    <label
-                      >Description <span class="text-danger">*</span></label
-                    >
-                    <textarea
-                      name="description"
-                      class="form-control"
-                      rows="3"
-                      required
-                    ></textarea>
+                    <label>Price <span class="text-danger">*</span></label>
+                    <input type="number" name="price" class="form-control" required placeholder="e.g. 49" />
                   </div>
 
-                  <!-- Technologies -->
+                  <!-- Duration -->
                   <div class="form-group">
-                    <label
-                      >Technologies (comma-separated)
-                      <span class="text-danger">*</span></label
-                    >
-                    <input
-                      type="text"
-                      name="technologies"
-                      class="form-control"
-                      placeholder="e.g. React, Node.js, MongoDB"
-                      required
-                    />
+                    <label>Duration <span class="text-danger">*</span></label>
+                    <input type="text" name="duration" class="form-control" required placeholder="e.g. Monthly, Yearly" />
                   </div>
 
-                  <!-- Live URL -->
+                  <!-- Features -->
                   <div class="form-group">
-                    <label>Live URL</label>
-                    <input
-                      type="url"
-                      name="liveUrl"
-                      class="form-control"
-                      placeholder="https://yourproject.com"
-                    />
+                    <label>Features (comma-separated)</label>
+                    <input type="text" name="features" class="form-control" placeholder="e.g. 10 Projects, Email Support, Dashboard Access" />
                   </div>
 
-                  <!-- GitHub URL -->
+                  <!-- Button Text -->
                   <div class="form-group">
-                    <label>GitHub URL</label>
-                    <input
-                      type="url"
-                      name="githubUrl"
-                      class="form-control"
-                      placeholder="https://github.com/yourrepo"
-                    />
+                    <label>Button Text</label>
+                    <input type="text" name="buttonText" class="form-control" placeholder="e.g. Get Started" />
                   </div>
 
-                  <!-- Project Image -->
+                  <!-- Button URL -->
                   <div class="form-group">
-                    <label>Project Image</label>
-                    <input
-                      type="file"
-                      name="image"
-                      accept="image/*"
-                      class="form-control-file"
-                    />
+                    <label>Button URL</label>
+                    <input type="url" name="buttonUrl" class="form-control" placeholder="https://example.com/signup" />
                   </div>
 
-                  <!-- Buttons -->
-                  <button type="submit" class="btn btn-primary">
-                    Add Project
-                  </button>
-                  <a href="/projects/list" class="btn btn-secondary">Cancel</a>
+                  <!-- Submit Buttons -->
+                  <button type="submit" class="btn btn-primary">Add Pricing Plan</button>
+                  <a href="/pricing/list" class="btn btn-secondary">Cancel</a>
                 </form>
               </div>
             </div>
           </div>
         </div>
+
         <%- include('../layout/footer.ejs') %>
       </div>
     </div>
 
+    <!-- JS Scripts -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>

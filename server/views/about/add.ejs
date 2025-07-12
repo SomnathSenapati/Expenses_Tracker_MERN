@@ -18,27 +18,26 @@
     <div id="wrapper">
       <!-- Sidebar -->
       <%- include('../layout/sideber.ejs') %>
-      <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
-          <!-- Topbar -->
+          <!-- Navbar -->
           <%- include('../layout/navber.ejs') %>
-          <!-- End of Topbar -->
 
-          <!-- Begin Page Content -->
+          <!-- Page Content -->
           <div class="container-fluid">
             <h1 class="h3 mb-4 text-gray-800">Add About Info</h1>
 
             <div class="card shadow mb-4">
               <div class="card-body">
 
-                <% if (typeof errorMessage !== "undefined" && errorMessage.length > 0) { %>
+                <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
                   <div class="alert alert-danger"><%= errorMessage %></div>
                 <% } %>
 
                 <form action="/about/add" method="POST" enctype="multipart/form-data">
+                  <!-- Title -->
                   <div class="form-group">
                     <label for="title">Title</label>
                     <input
@@ -46,13 +45,14 @@
                       name="title"
                       id="title"
                       class="form-control"
-                      placeholder="Enter title"
+                      placeholder="Enter main title"
                       required
                     />
                   </div>
 
+                  <!-- Subtitle -->
                   <div class="form-group">
-                    <label for="subtitle">Sub Title</label>
+                    <label for="subtitle">Subtitle</label>
                     <input
                       type="text"
                       name="subtitle"
@@ -63,6 +63,7 @@
                     />
                   </div>
 
+                  <!-- Description -->
                   <div class="form-group">
                     <label for="description">Description</label>
                     <textarea
@@ -70,16 +71,25 @@
                       id="description"
                       rows="5"
                       class="form-control"
-                      placeholder="Enter description"
+                      placeholder="Write a short bio or description"
                       required
                     ></textarea>
                   </div>
 
+                  <!-- Image Upload -->
                   <div class="form-group">
                     <label for="image">Profile Image</label>
-                    <input type="file" name="image" id="image" class="form-control-file" accept="image/*" required />
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      class="form-control-file"
+                      accept="image/*"
+                      required
+                    />
                   </div>
 
+                  <!-- Submit Button -->
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <a href="/about/list" class="btn btn-secondary">Cancel</a>
                 </form>
@@ -94,7 +104,7 @@
       </div>
     </div>
 
-    <!-- JS Scripts -->
+    <!-- Scripts -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
