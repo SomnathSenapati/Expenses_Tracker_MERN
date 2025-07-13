@@ -127,7 +127,7 @@ class ServicesController {
   async delete(req, res) {
     console.log(req.body);
 
-    try {
+    try { 
       const id = req.params.id;
 
       const updatedata = await HomeModel.findByIdAndUpdate(id, {

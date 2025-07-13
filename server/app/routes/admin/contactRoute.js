@@ -13,8 +13,8 @@ router.get("/add", (req, res) => {
   }
 });
 router.post('/add',ContactController.add)
-// router.get('/edit/:id',ContactController.edit)
-// router.post('/update/:id',ContactController.update)
-// router.get('/delete/:id',ContactController.delete)
+router.get('/edit/:id',ContactController.edit)
+router.post('/update/:id',ContactController.update)
+router.get('/delete/:id',ContactController.delete)
 
 module.exports = router;

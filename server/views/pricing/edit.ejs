@@ -1,104 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Edit Project</title>
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
-    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
-  </head>
-  <body id="page-top">
-    <div id="wrapper">
-      <%- include('../layout/sideber.ejs') %>
-      <div id="content-wrapper" class="d-flex flex-column">
-        <div id="content">
-          <%- include('../layout/navber.ejs') %>
-          <div class="container-fluid">
-            <h1 class="h3 mb-4 text-gray-800">Edit Project</h1>
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Pricing Plan</title>
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+  <div id="wrapper">
+    <%- include('../layout/sideber.ejs') %>
 
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <form
-                  action="/project/update/<%= data._id %>"
-                  method="POST"
-                  enctype="multipart/form-data"
-                >
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" name="title" class="form-control" value="<%= data.title %>" required />
-                  </div>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <%- include('../layout/navber.ejs') %>
 
-                  <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" class="form-control" rows="3" required><%= data.description %></textarea>
-                  </div>
+        <div class="container-fluid">
+          <h1 class="h3 mb-4 text-gray-800">Edit Pricing Plan</h1>
 
-                  <div class="form-group">
-                    <label>Technologies (comma-separated)</label>
-                    <input
-                      type="text"
-                      name="technologies"
-                      class="form-control"
-                      value="<%= data.technologies ? data.technologies.join(', ') : '' %>"
-                      placeholder="e.g. React, Node.js, MongoDB"
-                      required
-                    />
-                  </div>
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <% if (typeof errorMessage !== 'undefined') { %>
+                <div class="alert alert-danger"><%= errorMessage %></div>
+              <% } %>
 
-                  <div class="form-group">
-                    <label>Live URL</label>
-                    <input
-                      type="url"
-                      name="liveUrl"
-                      class="form-control"
-                      value="<%= data.liveUrl %>"
-                      placeholder="https://your-project.com"
-                    />
-                  </div>
+              <form action="/pricing/update/<%= data._id %>" method="POST">
+                <!-- Name -->
+                <div class="form-group">
+                  <label>Plan Name <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    required
+                    value="<%= data.name %>"
+                    placeholder="e.g. Basic, Pro, Enterprise"
+                  />
+                </div>
 
-                  <div class="form-group">
-                    <label>GitHub URL</label>
-                    <input
-                      type="url"
-                      name="githubUrl"
-                      class="form-control"
-                      value="<%= data.githubUrl %>"
-                      placeholder="https://github.com/username/repo"
-                    />
-                  </div>
+                <!-- Price -->
+                <div class="form-group">
+                  <label>Price <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    name="price"
+                    class="form-control"
+                    required
+                    value="<%= data.price %>"
+                    placeholder="e.g. ₹499, $49"
+                  />
+                </div>
 
-                  <div class="form-group">
-                    <label>Current Image</label><br />
-                    <% if (data.image) { %>
-                      <img src="/<%= data.image %>" alt="Project Image" height="100" />
-                    <% } else { %>
-                      <p>No image uploaded</p>
-                    <% } %>
-                  </div>
+                <!-- Features -->
+                <div class="form-group">
+                  <label>Features (comma-separated) <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    name="features"
+                    class="form-control"
+                    required
+                    value="<%= data.features ? data.features.join(', ') : '' %>"
+                    placeholder="e.g. 10 Projects, Email Support, Dashboard Access"
+                  />
+                </div>
 
-                  <div class="form-group">
-                    <label>Change Image</label>
-                    <input
-                      type="file"
-                      name="image"
-                      accept="image/*"
-                      class="form-control-file"
-                    />
-                  </div>
+                <!-- Button Text -->
+                <div class="form-group">
+                  <label>Button Text</label>
+                  <input
+                    type="text"
+                    name="button"
+                    class="form-control"
+                    value="<%= data.button %>"
+                    placeholder="e.g. Subscribe"
+                  />
+                </div>
 
-                  <button type="submit" class="btn btn-primary">Update Project</button>
-                  <a href="/projects/list" class="btn btn-secondary">Cancel</a>
-                </form>
-              </div>
+                <!-- Popular -->
+                <div class="form-group form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="popular"
+                    name="popular"
+                    <%= data.popular ? 'checked' : '' %>
+                  />
+                  <label class="form-check-label" for="popular">Mark as Popular Plan</label>
+                </div>
+
+                <!-- Submit Buttons -->
+                <button type="submit" class="btn btn-primary">Update Pricing Plan</button>
+                <a href="/pricing/list" class="btn btn-secondary">Cancel</a>
+              </form>
             </div>
           </div>
         </div>
-        <%- include('../layout/footer.ejs') %>
       </div>
-    </div>
 
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/js/sb-admin-2.min.js"></script>
-  </body>
+      <%- include('../layout/footer.ejs') %>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/js/sb-admin-2.min.js"></script>
+</body>
 </html>

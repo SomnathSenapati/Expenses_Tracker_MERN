@@ -15,7 +15,7 @@ class ServicesController {
       const sdata = new ServicesModel({
         title,
         description,
-        icon
+        icon,
       });
       const data = await sdata.save();
       if (data) {
@@ -44,7 +44,7 @@ class ServicesController {
     try {
       const id = req.params.id;
       const editdata = await ServicesModel.findById(id);
-      res.render("about/edit", {
+      res.render("services/edit", {
         title: "edit page",
         data: editdata,
       });
@@ -57,12 +57,12 @@ class ServicesController {
     try {
       const id = req.params.id;
 
-      // Fetch the existing about document
-      const existingabout = await ServicesModel.findById(id);
-      if (!existingabout) {
+      // Fetch the existing services document
+      const existingservices = await ServicesModel.findById(id);
+      if (!existingservices) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "services not found",
         });
       }
 
@@ -71,13 +71,13 @@ class ServicesController {
       // If a new image is uploaded
       if (req.file) {
         // Delete the old image file if it exists
-        if (existingabout.image) {
+        if (existingservices.image) {
           const oldImagePath = path.join(
             __dirname,
             "..",
             "..",
             "..",
-            existingabout.image
+            existingservices.image
           );
           fs.unlink(oldImagePath, (err) => {
             if (err) {
@@ -93,8 +93,8 @@ class ServicesController {
         console.log("New image uploaded and path added:", req.file.path);
       }
 
-      // Update the about document
-      const updatedabout = await ServicesModel.findByIdAndUpdate(
+      // Update the services document
+      const updatedservices = await ServicesModel.findByIdAndUpdate(
         id,
         updateData,
         {
@@ -102,14 +102,14 @@ class ServicesController {
         }
       );
 
-      if (!updatedabout) {
+      if (!updatedservices) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "services not found",
         });
       }
 
-      res.redirect("/about/list");
+      res.redirect("/services/list");
     } catch (error) {
       console.error("Update error:", error);
       return res.status(500).json({
@@ -120,46 +120,25 @@ class ServicesController {
   }
 
   async delete(req, res) {
-    console.log(req.body);
-
     try {
       const id = req.params.id;
 
-      const updatedata = await ServicesModel.findByIdAndUpdate(id, {
-        isDeleted: true,
-      });
-      if (!updatedata) {
+      const deletedData = await ServicesModel.findByIdAndDelete(id);
+
+      if (!deletedData) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "Services not found",
         });
       }
 
-      if (updatedata.image) {
-        const absolutePath = path.join(
-          __dirname,
-          "..",
-          "..",
-          "..",
-          updatedata.image
-        );
-        console.log("__dirname to delete:", __dirname);
-        console.log("Attempting to delete:", absolutePath);
-
-        if (fsSync.existsSync(absolutePath)) {
-          await fs.unlink(absolutePath);
-          console.log(absolutePath);
-
-          console.log("File deleted:", absolutePath);
-        } else {
-          console.log("File not found:", absolutePath);
-        }
-      }
-
-      res.redirect("/about/list");
+      res.redirect("/services/list");
     } catch (error) {
-      console.log(error);
-      console.error("Error deleting file:", err);
+      console.error("Error deleting services:", error);
+      res.status(500).json({
+        status: false,
+        message: "Internal server error",
+      });
     }
   }
 }

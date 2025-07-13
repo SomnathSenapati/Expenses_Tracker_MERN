@@ -14,8 +14,8 @@ router.get("/add", (req, res) => {
 });
 
 router.post("/add", ServicesController.add);
-// router.get("/edit/:id", ServicesController.edit);
-// router.post("/update/:id", ServicesController.update);
-// router.get("/delete/:id", ServicesController.delete);
+router.get("/edit/:id", ServicesController.edit);
+router.post("/update/:id", ServicesController.update);
+router.get("/delete/:id", ServicesController.delete);
 
 module.exports = router;

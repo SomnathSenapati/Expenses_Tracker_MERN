@@ -15,11 +15,11 @@ class PricingController {
       const sdata = new PricingModel({
         name,
         price,
-        features: features.split(",").map(f=> f.trim()),
+        features: features.split(",").map((f) => f.trim()),
         button,
-        popular:req.body.popular === "on",
+        popular: req.body.popular === "on",
       });
-      
+
       const data = await sdata.save();
       if (data) {
         res.redirect("/pricing/list");
@@ -48,7 +48,7 @@ class PricingController {
     try {
       const id = req.params.id;
       const editdata = await PricingModel.findById(id);
-      res.render("about/edit", {
+      res.render("pricing/edit", {
         title: "edit page",
         data: editdata,
       });
@@ -61,12 +61,12 @@ class PricingController {
     try {
       const id = req.params.id;
 
-      // Fetch the existing about document
-      const existingabout = await PricingModel.findById(id);
-      if (!existingabout) {
+      // Fetch the existing pricing document
+      const existingpricing = await PricingModel.findById(id);
+      if (!existingpricing) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "pricing not found",
         });
       }
 
@@ -75,13 +75,13 @@ class PricingController {
       // If a new image is uploaded
       if (req.file) {
         // Delete the old image file if it exists
-        if (existingabout.image) {
+        if (existingpricing.image) {
           const oldImagePath = path.join(
             __dirname,
             "..",
             "..",
             "..",
-            existingabout.image
+            existingpricing.image
           );
           fs.unlink(oldImagePath, (err) => {
             if (err) {
@@ -97,19 +97,23 @@ class PricingController {
         console.log("New image uploaded and path added:", req.file.path);
       }
 
-      // Update the about document
-      const updatedabout = await PricingModel.findByIdAndUpdate(id, updateData, {
-        new: true,
-      });
+      // Update the pricing document
+      const updatedpricing = await PricingModel.findByIdAndUpdate(
+        id,
+        updateData,
+        {
+          new: true,
+        }
+      );
 
-      if (!updatedabout) {
+      if (!updatedpricing) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "pricing not found",
         });
       }
 
-      res.redirect("/about/list");
+      res.redirect("/pricing/list");
     } catch (error) {
       console.error("Update error:", error);
       return res.status(500).json({
@@ -120,46 +124,25 @@ class PricingController {
   }
 
   async delete(req, res) {
-    console.log(req.body);
-
     try {
       const id = req.params.id;
 
-      const updatedata = await PricingModel.findByIdAndUpdate(id, {
-        isDeleted: true,
-      });
-      if (!updatedata) {
+      const deletedData = await PricingModel.findByIdAndDelete(id);
+
+      if (!deletedData) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "Pricing not found",
         });
       }
 
-      if (updatedata.image) {
-        const absolutePath = path.join(
-          __dirname,
-          "..",
-          "..",
-          "..",
-          updatedata.image
-        );
-        console.log("__dirname to delete:", __dirname);
-        console.log("Attempting to delete:", absolutePath);
-
-        if (fsSync.existsSync(absolutePath)) {
-          await fs.unlink(absolutePath);
-          console.log(absolutePath);
-
-          console.log("File deleted:", absolutePath);
-        } else {
-          console.log("File not found:", absolutePath);
-        }
-      }
-
-      res.redirect("/about/list");
+      res.redirect("/pricing/list");
     } catch (error) {
-      console.log(error);
-      console.error("Error deleting file:", err);
+      console.error("Error deleting pricing:", error);
+      res.status(500).json({
+        status: false,
+        message: "Internal server error",
+      });
     }
   }
 }

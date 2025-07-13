@@ -13,8 +13,8 @@ router.get("/add", (req, res) => {
   }
 });
 router.post('/add',HomeController.add)
-// router.get('/edit/:id',HomeController.edit)
-// router.post('/update/:id',HomeController.update)
-// router.get('/delete/:id',HomeController.delete)
+router.get('/edit/:id',HomeController.edit)
+router.post('/update/:id',HomeController.update)
+router.get('/delete/:id',HomeController.delete)
 
 module.exports = router;

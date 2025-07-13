@@ -13,8 +13,8 @@ router.get("/add", (req, res) => {
     res.redirect("/pricing/add");
   }
 });
-// router.get('/edit/:id',PricingController.edit)
-// router.post('/update/:id',StudentImageupload.single('image'),PricingController.update)
-// router.get('/delete/:id',PricingController.delete)
+router.get('/edit/:id',PricingController.edit)
+router.post('/update/:id',PricingController.update)
+router.get('/delete/:id',PricingController.delete)
 
 module.exports = router;

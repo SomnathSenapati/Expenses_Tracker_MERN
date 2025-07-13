@@ -116,46 +116,25 @@ class AboutController {
   }
 
   async delete(req, res) {
-    console.log(req.body);
-
     try {
       const id = req.params.id;
 
-      const updatedata = await AboutModel.findByIdAndUpdate(id, {
-        isDeleted: true,
-      });
-      if (!updatedata) {
+      const deletedData = await AboutModel.findByIdAndDelete(id);
+
+      if (!deletedData) {
         return res.status(404).json({
           status: false,
-          message: "about not found",
+          message: "About not found",
         });
-      }
-
-      if (updatedata.image) {
-        const absolutePath = path.join(
-          __dirname,
-          "..",
-          "..",
-          "..",
-          updatedata.image
-        );
-        console.log("__dirname to delete:", __dirname);
-        console.log("Attempting to delete:", absolutePath);
-
-        if (fsSync.existsSync(absolutePath)) {
-          await fs.unlink(absolutePath);
-          console.log(absolutePath);
-
-          console.log("File deleted:", absolutePath);
-        } else {
-          console.log("File not found:", absolutePath);
-        }
       }
 
       res.redirect("/about/list");
     } catch (error) {
-      console.log(error);
-      console.error("Error deleting file:", err);
+      console.error("Error deleting about:", error);
+      res.status(500).json({
+        status: false,
+        message: "Internal server error",
+      });
     }
   }
 }

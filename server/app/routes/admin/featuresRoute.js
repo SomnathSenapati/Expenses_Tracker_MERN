@@ -13,8 +13,8 @@ router.get("/add", (req, res) => {
   }
 });
 router.post('/add',FeaturesController.add)
-// router.get('/edit/:id',FeaturesController.edit)
-// router.post('/update/:id',FeaturesController.update)
-// router.get('/delete/:id',FeaturesController.delete)
+router.get('/edit/:id',FeaturesController.edit)
+router.post('/update/:id',FeaturesController.update)
+router.get('/delete/:id',FeaturesController.delete)
 
 module.exports = router;
