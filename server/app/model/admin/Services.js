@@ -11,8 +11,8 @@ const serviceSchema = new mongoose.Schema(
       required: true,
     },
     icon: {
-      type: String,
-      required: true, // Emoji or icon character
+      type: String, //emoji
+      required: true,
     },
     isActive: {
       type: Boolean,

@@ -18,9 +18,13 @@ const contactSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 

@@ -4,9 +4,10 @@ const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
 class ServicesController {
-  async createabout(req, res) {
+
+  async add(req, res) {
     console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
 
     try {
       //console.log(req.body);
@@ -31,10 +32,9 @@ class ServicesController {
     }
   }
 
-  //about
   async List(req, res) {
     try {
-      const data = await HomeModel.find({ isDeleted: false });
+      const data = await HomeModel.find();
 
       res.render("home/list", {
         title: "home List",

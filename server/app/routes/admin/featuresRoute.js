@@ -12,7 +12,7 @@ router.get("/add", (req, res) => {
     res.redirect("/features/add");
   }
 });
-// router.post('/add',FeaturesController.createexperience)
+router.post('/add',FeaturesController.add)
 // router.get('/edit/:id',FeaturesController.edit)
 // router.post('/update/:id',FeaturesController.update)
 // router.get('/delete/:id',FeaturesController.delete)

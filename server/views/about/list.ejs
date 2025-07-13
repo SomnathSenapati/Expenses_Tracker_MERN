@@ -32,9 +32,7 @@
                         <tr>
                           <th>#</th>
                           <th>Title</th>
-                          <th>Subtitle</th>
-                          <th>Description</th>
-                          <th>Image</th>
+                          <th>Content Preview</th>
                           <th>Status</th>
                           <th>Actions</th>
                         </tr>
@@ -44,13 +42,11 @@
                           <tr>
                             <td><%= index + 1 %></td>
                             <td><%= item.title %></td>
-                            <td><%= item.subtitle || "N/A" %></td>
-                            <td><%= item.description?.slice(0, 50) || "N/A" %>...</td>
                             <td>
-                              <% if (item.image) { %>
-                                <img src="/uploads/about/<%= item.image %>" width="60" height="60" class="img-thumbnail" />
+                              <% if (item.content && item.content.length > 0) { %>
+                                <%= item.content[0].slice(0, 100) %>...
                               <% } else { %>
-                                <span class="text-muted">No Image</span>
+                                <span class="text-muted">No Content</span>
                               <% } %>
                             </td>
                             <td>
@@ -84,6 +80,10 @@
     <script src="/js/sb-admin-2.min.js"></script>
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/js/demo/datatables-demo.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#dataTable').DataTable();
+      });
+    </script>
   </body>
 </html>

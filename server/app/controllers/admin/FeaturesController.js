@@ -3,26 +3,23 @@ const FeaturesModel = require("../../model/admin/Features");
 const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
-class PricingController {
-  async createabout(req, res) {
+class FeaturesController {
+  async add(req, res) {
     console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
 
     try {
       //console.log(req.body);
-      const { title, subtitle, description } = req.body;
+      const { title, description, icon } = req.body;
 
       const sdata = new FeaturesModel({
         title,
-        subtitle,
         description,
+        icon
       });
-      if (req.file) {
-        sdata.image = req.file.path;
-      }
       const data = await sdata.save();
       if (data) {
-        res.redirect("/about/list");
+        res.redirect("/features/list");
       } else {
         res.redirect("/add");
       }
@@ -31,10 +28,9 @@ class PricingController {
     }
   }
 
-  //about
   async List(req, res) {
     try {
-      const data = await FeaturesModel.find({ isDeleted: false });
+      const data = await FeaturesModel.find();
 
       res.render("features/list", {
         title: "features List",
@@ -164,4 +160,4 @@ class PricingController {
     }
   }
 }
-module.exports = new PricingController();
+module.exports = new FeaturesController();

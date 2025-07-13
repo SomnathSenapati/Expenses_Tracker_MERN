@@ -4,25 +4,25 @@ const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
 class PricingController {
-  async createabout(req, res) {
+  async add(req, res) {
     console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
 
     try {
       //console.log(req.body);
-      const { title, subtitle, description } = req.body;
+      const { name, price, features, button, popular } = req.body;
 
       const sdata = new PricingModel({
-        title,
-        subtitle,
-        description,
+        name,
+        price,
+        features: features.split(",").map(f=> f.trim()),
+        button,
+        popular:req.body.popular === "on",
       });
-      if (req.file) {
-        sdata.image = req.file.path;
-      }
+      
       const data = await sdata.save();
       if (data) {
-        res.redirect("/about/list");
+        res.redirect("/pricing/list");
       } else {
         res.redirect("/add");
       }
@@ -31,10 +31,9 @@ class PricingController {
     }
   }
 
-  //about
   async List(req, res) {
     try {
-      const data = await PricingModel.find({ isDeleted: false });
+      const data = await PricingModel.find();
 
       res.render("pricing/list", {
         title: "pricing List",

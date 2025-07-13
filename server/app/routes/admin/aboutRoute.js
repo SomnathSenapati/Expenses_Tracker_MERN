@@ -12,7 +12,7 @@ router.get("/add", (req, res) => {
     res.redirect("/about/add");
   }
 });
-// router.post('/add',AboutController.createabout)
+router.post('/add',AboutController.createabout)
 // router.get('/edit/:id',AboutController.edit)
 // router.post('/update/:id',AboutController.update)
 // router.get('/delete/:id',AboutController.delete)

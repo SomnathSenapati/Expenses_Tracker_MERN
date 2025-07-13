@@ -6,20 +6,17 @@ const path = require("path");
 class ServicesController {
   async add(req, res) {
     console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
 
     try {
       //console.log(req.body);
-      const { title, subtitle, description } = req.body;
+      const { title, description, icon } = req.body;
 
       const sdata = new ServicesModel({
         title,
-        subtitle,
         description,
+        icon
       });
-      if (req.file) {
-        sdata.image = req.file.path;
-      }
       const data = await sdata.save();
       if (data) {
         res.redirect("/services/list");
@@ -31,11 +28,9 @@ class ServicesController {
     }
   }
 
-  //about
   async List(req, res) {
     try {
-      const data = await ServicesModel.find({ isDeleted: false });
-
+      const data = await ServicesModel.find();
       res.render("services/list", {
         title: "services List",
         data: data,

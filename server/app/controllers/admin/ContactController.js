@@ -4,9 +4,9 @@ const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
 class ContactController {
-  async createcontact(req, res) {
+  async add(req, res) {
     console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
 
     try {
       //console.log(req.body);
@@ -29,7 +29,7 @@ class ContactController {
   }
   async List(req, res) {
     try {
-      const data = await ContactModel.find({ isDeleted: false });
+      const data = await ContactModel.find();
 
       res.render("contact/list", {
         title: "contact List",

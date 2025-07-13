@@ -7,13 +7,8 @@ const aboutSchema = new mongoose.Schema(
       required: true,
       default: "About Us",
     },
-    subtitle: {
-      type: String,
-      required: true,
-      default: "The team behind MoneyMate",
-    },
     content: {
-      type: [String], // Array of paragraphs
+      type: [String], 
       required: true,
     },
     isActive: {

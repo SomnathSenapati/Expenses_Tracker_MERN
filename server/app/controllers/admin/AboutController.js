@@ -6,20 +6,16 @@ const path = require("path");
 class AboutController {
   async createabout(req, res) {
     console.log(req.body);
-    console.log(req.file);
+    // console.log(req.file);
 
     try {
       //console.log(req.body);
-      const { title, subtitle, description } = req.body;
+      const { title, content } = req.body;
 
       const sdata = new AboutModel({
         title,
-        subtitle,
-        description,
+        content,
       });
-      if (req.file) {
-        sdata.image = req.file.path;
-      }
       const data = await sdata.save();
       if (data) {
         res.redirect("/about/list");
@@ -31,10 +27,9 @@ class AboutController {
     }
   }
 
-  //about
   async aboutList(req, res) {
     try {
-      const data = await AboutModel.find({ isDeleted: false });
+      const data = await AboutModel.find();
 
       res.render("about/list", {
         title: "about List",

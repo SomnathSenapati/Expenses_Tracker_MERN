@@ -1,225 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SideBar</title>
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+  <!-- Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-coins"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">MoneyMate Admin</div>
+  </a>
 
-    <!-- Font Awesome -->
-    <link
-      href="vendor/fontawesome-free/css/all.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+  <hr class="sidebar-divider my-0" />
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700,900"
-      rel="stylesheet"
-    />
+  <!-- Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" href="/admin/dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+  </li>
 
-    <!-- Custom styles -->
-    <link href="/css/sb-admin-2.min.css" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- Sidebar -->
-    <ul
-      class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-      id="accordionSidebar"
-    >
-      <!-- Sidebar - Brand -->
-      <a
-        class="sidebar-brand d-flex align-items-center justify-content-center"
-        href="/"
-      >
-        <div class="sidebar-brand-icon rotate-n-15">
-          <!-- <i class="fas fa-laugh-wink"></i> -->
-        </div>
-        <div class="sidebar-brand-text mx-3">MoneyMate Admin</div>
-      </a>
+  <hr class="sidebar-divider" />
 
-      <hr class="sidebar-divider my-0" />
+  <!-- Heading -->
+  <div class="sidebar-heading">Interface</div>
 
-      <!-- Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="/admin/dashboard">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
+  <!-- Home -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHome" aria-expanded="false" aria-controls="collapseHome">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <div id="collapseHome" class="collapse" aria-labelledby="headingHome" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Home List:</h6>
+        <a class="collapse-item" href="/home/list">List</a>
+      </div>
+    </div>
+  </li>
 
-      <hr class="sidebar-divider" />
+  <!-- Services -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse" aria-expanded="false" aria-controls="collapseCourse">
+      <i class="fas fa-concierge-bell"></i>
+      <span>Services</span>
+    </a>
+    <div id="collapseCourse" class="collapse" aria-labelledby="headingCourse" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Services List:</h6>
+        <a class="collapse-item" href="/services/list">List</a>
+      </div>
+    </div>
+  </li>
 
-      <!-- Heading -->
-      <div class="sidebar-heading">Interface</div>
+  <!-- Features -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePortfolio" aria-expanded="false" aria-controls="collapsePortfolio">
+      <i class="fas fa-star"></i>
+      <span>Features</span>
+    </a>
+    <div id="collapsePortfolio" class="collapse" aria-labelledby="headingPortfolio" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Features List:</h6>
+        <a class="collapse-item" href="/features/list">List</a>
+      </div>
+    </div>
+  </li>
 
-      <!-- Home Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapseHome"
-          aria-expanded="false"
-          aria-controls="collapseHome"
-        >
-          <i class="fas fa-home"></i>
-          <span>Home</span>
-        </a>
-        <div
-          id="collapseHome"
-          class="collapse"
-          aria-labelledby="headingHome"
-          data-parent="#accordionSidebar"
-        >
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Home List:</h6>
-            <a class="collapse-item" href="/home/list">List</a>
-          </div>
-        </div>
-      </li>
+  <!-- Pricing -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExperience" aria-expanded="false" aria-controls="collapseExperience">
+      <i class="fas fa-tags"></i>
+      <span>Pricing</span>
+    </a>
+    <div id="collapseExperience" class="collapse" aria-labelledby="headingExperience" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Pricing List:</h6>
+        <a class="collapse-item" href="/pricing/list">List</a>
+      </div>
+    </div>
+  </li>
 
-      <!-- Services Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapseCourse"
-          aria-expanded="false"
-          aria-controls="collapseCourse"
-        >
-          <i class="fas fa-fw fa-user"></i>
-          <span>Services</span>
-        </a>
-        <div
-          id="collapseCourse"
-          class="collapse"
-          aria-labelledby="headingCourse"
-          data-parent="#accordionSidebar"
-        >
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Services List:</h6>
-            <a class="collapse-item" href="/services/list">List</a>
-          </div>
-        </div>
-      </li>
+  <!-- About Us -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="false" aria-controls="collapseProjects">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <div id="collapseProjects" class="collapse" aria-labelledby="headingProjects" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">About Us List:</h6>
+        <a class="collapse-item" href="/about/list">List</a>
+      </div>
+    </div>
+  </li>
 
-      <!-- Features Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapsePortfolio"
-          aria-expanded="false"
-          aria-controls="collapsePortfolio"
-        >
-          <i class="fas fa-fw fa-tools"></i>
-          <span>Features</span>
-        </a>
-        <div
-          id="collapsePortfolio"
-          class="collapse"
-          aria-labelledby="headingPortfolio"
-          data-parent="#accordionSidebar"
-        >
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Features List:</h6>
-            <a class="collapse-item" href="/features/list">List</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Pricing Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapseExperience"
-          aria-expanded="false"
-          aria-controls="collapseExperience"
-        >
-          <i class="fas fa-fw fa-briefcase"></i>
-          <span>Pricing</span>
-        </a>
-        <div
-          id="collapseExperience"
-          class="collapse"
-          aria-labelledby="headingExperience"
-          data-parent="#accordionSidebar"
-        >
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Pricing List:</h6>
-            <a class="collapse-item" href="/pricing/list">List</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- About Us Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapseProjects"
-          aria-expanded="false"
-          aria-controls="collapseProjects"
-        >
-          <i class="fas fa-fw fa-tasks"></i>
-          <span>About Us</span>
-        </a>
-        <div
-          id="collapseProjects"
-          class="collapse"
-          aria-labelledby="headingProjects"
-          data-parent="#accordionSidebar"
-        >
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">About Us List:</h6>
-            <a class="collapse-item" href="/about/list">List</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Contact Menu -->
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          href="#"
-          data-toggle="collapse"
-          data-target="#collapseContact"
-          aria-expanded="false"
-          aria-controls="collapseContact"
-        >
-          <i class="fas fa-fw fa-envelope"></i>
-          <span>Contact</span>
-        </a>
-        <div
-          id="collapseContact"
-          class="collapse"
-          aria-labelledby="headingContact"
-          data-parent="#accordionSidebar"
-        >
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Contact List:</h6>
-            <a class="collapse-item" href="/contact/list">List</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- JS Scripts -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Optional: Chart Plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-  </body>
-</html>
+  <!-- Contact -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
+      <i class="fas fa-envelope"></i>
+      <span>Contact</span>
+    </a>
+    <div id="collapseContact" class="collapse" aria-labelledby="headingContact" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Contact List:</h6>
+        <a class="collapse-item" href="/contact/list">List</a>
+      </div>
+    </div>
+  </li>
+</ul>

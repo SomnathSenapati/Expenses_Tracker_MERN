@@ -1,9 +1,8 @@
 const express = require("express");
 const PricingController = require("../../controllers/admin/PricingController");
-const StudentImageupload = require("../../helper/studentimageupload");
 const router = express.Router();
 
-// router.post('/add',StudentImageupload.single('image'),PricingController.createabout)
+router.post('/add',PricingController.add)
 router.get("/list", PricingController.List);
 router.get("/add", (req, res) => {
   try {

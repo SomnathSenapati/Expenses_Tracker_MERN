@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const heroSchema = new mongoose.Schema(
+const homeSchema = new mongoose.Schema(
   {
     headingLine1: { type: String, required: true }, 
     headingLine2: { type: String, required: true }, 
@@ -20,5 +20,5 @@ const heroSchema = new mongoose.Schema(
   }
 );
 
-const heroModel = mongoose.model("hero", heroSchema);
-module.exports = heroModel;
+const homeModel = mongoose.model("home", homeSchema);
+module.exports = homeModel;
