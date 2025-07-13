@@ -779,6 +779,66 @@ a {
     cursor: pointer;
 }
 
+.welcome-text {
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #333;
+    right: 1rem;
+    top: 3.5rem;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    min-width: 150px;
+    z-index: 999;
+}
+
+.dropdown-item {
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #444;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+
+/* profile page */
+.profile-container {
+    max-width: 500px;
+    margin: 4rem auto;
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 107, 66, 0.2);
+}
+
+.profile-card p {
+    font-size: 1rem;
+    margin: 1rem 0;
+    color: #ccc;
+}
+
+.profile-card strong {
+    color: #ff6b42;
+}
 /* ========== RESPONSIVE ========== */
 
 /* ========== RESPONSIVE ========== */

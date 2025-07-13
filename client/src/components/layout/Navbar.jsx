@@ -4,18 +4,32 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+
     setIsLoggedIn(!!token);
-  }, [location]); // <-- Run on every route change
+
+    if (user) {
+      try {
+        const parsedUser = JSON.parse(user);
+        setUserName(parsedUser.name || "User");
+      } catch (err) {
+        console.error("Failed to parse user:", err);
+        setUserName("User");
+      }
+    }
+  }, [location]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
+    setUserName("");
     navigate("/login");
   };
 
@@ -81,10 +95,16 @@ const Navbar = () => {
         ) : (
           <div className="profile-dropdown">
             <div
-              className="profile-icon"
+              className="welcome-text"
               onClick={() => setShowDropdown((prev) => !prev)}
             >
-              👤
+              Welcome, {userName}
+              <span
+                className="profile-icon"
+                style={{ marginLeft: "8px", cursor: "pointer" }}
+              >
+                👤
+              </span>
             </div>
             {showDropdown && (
               <div className="dropdown-menu">

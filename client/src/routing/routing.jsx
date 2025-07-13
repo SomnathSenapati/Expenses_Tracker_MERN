@@ -12,6 +12,7 @@ import Pricing from "../pages/Pricing";
 import AboutUs from "../pages/AboutUs";
 import Dasdboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
+import Profile from "../pages/Profile";
 
 const Routing = () => {
   return (
@@ -31,6 +32,7 @@ const Routing = () => {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/dashboard" element={<Dasdboard />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
