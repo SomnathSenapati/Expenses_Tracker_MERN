@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
@@ -26,16 +25,16 @@ const HeroSection = () => {
           </button>
           <button className="btn-secondary">View Demo</button>
         </div>
-        {/* <div className="brands">
-          <img src="/brands/severin.png" alt="brand" />
-          <img src="/brands/canali.png" alt="brand" />
+        <div className="brands">
+          <img src="/logo.png" alt="brand" />
+          <img src="/rb.png" alt="brand" />
           <img src="/brands/praxair.png" alt="brand" />
           <img src="/brands/solarcity.png" alt="brand" />
           <img src="/brands/connex.png" alt="brand" />
           <img src="/brands/brickworks.png" alt="brand" />
-        </div> */}
+        </div>
       </div>
-      <div className="hero-analytics">
+      <div className = "hero-analytics">
         <img src="hero.png" alt="brand" />
       </div>
     </section>
