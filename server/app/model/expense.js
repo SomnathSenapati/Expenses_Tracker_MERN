@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const incomeSchema = new mongoose.Schema(
+const expenseSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -33,5 +33,5 @@ const incomeSchema = new mongoose.Schema(
   }
 );
 
-const incomeModel = mongoose.model("income", incomeSchema);
-module.exports = incomeModel;
+const expenseModel = mongoose.model("expense", expenseSchema);
+module.exports = expenseModel;

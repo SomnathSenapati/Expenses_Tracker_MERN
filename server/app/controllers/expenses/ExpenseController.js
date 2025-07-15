@@ -1,9 +1,9 @@
-const incomeModel = require("../../model/income");
+const expenseModel = require("../../model/expense");
 const httpStatusCode = require("../../helper/httpStatusCode");
 
-class IncomeController {
-  // Create Income
-  async createIncome(req, res) {
+class ExpenseController {
+  // Create expense
+  async createexpense(req, res) {
     try {
       const { title, description, type, amount, user } = req.body;
 
@@ -21,7 +21,7 @@ class IncomeController {
         });
       }
 
-      const income = new incomeModel({
+      const expense = new expenseModel({
         // userId: req.user._id,
         title,
         description,
@@ -30,71 +30,71 @@ class IncomeController {
         user,
       });
 
-      const savedIncome = await income.save();
+      const savedexpense = await expense.save();
 
       return res.status(httpStatusCode.Create).json({
         status: true,
-        message: "Income added successfully",
-        data: savedIncome,
+        message: "expense added successfully",
+        data: savedexpense,
       });
     } catch (error) {
-      console.error("Create Income Error:", error);
+      console.error("Create expense Error:", error);
 
       return res.status(httpStatusCode.InternalServerError).json({
         status: false,
-        message: "Failed to create income",
+        message: "Failed to create expense",
         error: error.message,
       });
     }
   }
-  // fetch all income
-  async AllIncome(req, res) {
+  // fetch all expense
+  async Allexpense(req, res) {
     try {
-      const income = await incomeModel.find();
+      const expense = await expenseModel.find();
       return res.status(httpStatusCode.Ok).json({
         status: true,
-        message: "All Income Fetch Successfully",
-        total: income.length,
-        income: income,
+        message: "All expense Fetch Successfully",
+        total: expense.length,
+        expense: expense,
       });
     } catch (error) {
-      console.error("Fetching Income Error:", error);
+      console.error("Fetching expense Error:", error);
 
       return res.status(httpStatusCode.InternalServerError).json({
         status: false,
-        message: "Failed to fetch income",
+        message: "Failed to fetch expense",
         error: error.message,
       });
     }
   }
-  // fetch single income
-  async editIncome(req, res) {
+  // fetch single expense
+  async editexpense(req, res) {
     try {
       const id = req.params.id;
-      const income = await incomeModel.findById(id);
+      const expense = await expenseModel.findById(id);
       return res.status(httpStatusCode.Ok).json({
         status: true,
-        message: "Income Fetch Successfully",
-        data: income,
+        message: "expense Fetch Successfully",
+        data: expense,
       });
     } catch (error) {
       return res.status(httpStatusCode.InternalServerError).json({
         status: false,
-        message: "Failed to fetch income",
+        message: "Failed to fetch expense",
         error: error.message,
       });
     }
   }
   // for update
-  async updateIncome(req, res) {
+  async updateexpense(req, res) {
     try {
       const id = req.params.id;
 
-      await incomeModel.findByIdAndUpdate(id, req.body);
+      await expenseModel.findByIdAndUpdate(id, req.body);
 
       return res.status(httpStatusCode.Create).json({
         status: true,
-        message: "Income Updated successfully",
+        message: "expense Updated successfully",
       });
     } catch (error) {
       return res.status(httpStatusCode.InternalServerError).json({
@@ -104,15 +104,15 @@ class IncomeController {
     }
   }
   //for delete
-  async deleteIncome(req, res) {
+  async deleteexpense(req, res) {
     try {
       const id = req.params.id;
 
-      await incomeModel.findByIdAndDelete(id);
+      await expenseModel.findByIdAndDelete(id);
 
       return res.status(httpStatusCode.Create).json({
         status: true,
-        message: "Income deleted successfully",
+        message: "expense deleted successfully",
       });
     } catch (error) {
       return res.status(httpStatusCode.InternalServerError).json({
@@ -123,4 +123,4 @@ class IncomeController {
   }
 }
 
-module.exports = new IncomeController();
+module.exports = new ExpenseController();

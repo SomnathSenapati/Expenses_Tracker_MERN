@@ -50,6 +50,9 @@ const userRouter = require("./app/routes/users/userRouter");
 app.use("/api/user", userRouter);
 
 const IncomeRouter = require("./app/routes/income/incomeRoute");
-app.use("/api/income", IncomeRouter);
+app.use("/api", IncomeRouter);
+
+const ExpenseRouter = require("./app/routes/expenses/expenseRoute");
+app.use("/api", ExpenseRouter);
 
 module.exports = app;
