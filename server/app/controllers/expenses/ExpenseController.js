@@ -49,8 +49,9 @@ class ExpenseController {
   }
   // fetch all expense
   async Allexpense(req, res) {
+    const {page} = req.query
     try {
-      const expense = await expenseModel.find();
+      const expense = await expenseModel.paginate({},{limit:10, page:Number(page)});
       return res.status(httpStatusCode.Ok).json({
         status: true,
         message: "All expense Fetch Successfully",

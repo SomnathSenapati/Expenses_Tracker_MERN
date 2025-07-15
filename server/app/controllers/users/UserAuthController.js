@@ -126,6 +126,14 @@ class UserAuthController {
         .json({ message: "Server error" });
     }
   }
+
+  async profile(req, res){
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 }
 
 module.exports = new UserAuthController();

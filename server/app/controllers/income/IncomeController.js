@@ -49,8 +49,9 @@ class IncomeController {
   }
   // fetch all income
   async AllIncome(req, res) {
+    const {page} = req.query
     try {
-      const income = await incomeModel.find();
+      const income = await incomeModel.paginate({}, { limit: 10, page: Number(page) });
       return res.status(httpStatusCode.Ok).json({
         status: true,
         message: "All Income Fetch Successfully",
