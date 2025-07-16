@@ -127,14 +127,24 @@ class UserAuthController {
     }
   }
 
-  async profile(req, res){
+  async profile(req, res) {
     try {
-      
+      const id = req.params.id;
+
+      const edit = await userModel.findById(id);
+
+      return res.status(httpStatusCode.Ok).json({
+        status: true,
+        message: "get single user",
+        data: edit,
+      });
     } catch (error) {
-      
+      return res.status(ErrorCode.internalServerError).json({
+        status: false,
+        message: error.message,
+      });
     }
   }
 }
 
 module.exports = new UserAuthController();
- 

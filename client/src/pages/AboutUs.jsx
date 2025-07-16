@@ -1,26 +1,49 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const AboutUs = () => {
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchAboutUs = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:2809/api/about/list"
+        );
+
+        // Check if data exists and has at least one item
+        if (response.data.status && response.data.data.length > 0) {
+          setAboutData(response.data.data[0]); // First item
+        } else {
+          setError("No About Us data found.");
+        }
+      } catch (err) {
+        setError("Failed to load About Us content.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAboutUs();
+  }, []);
+
+  if (loading) return <p>Loading About Us...</p>;
+  if (error) return <p>{error}</p>;
+  if (!aboutData) return null;
+
   return (
     <section className="about-section">
       <h2 className="section-title">About Us</h2>
-      <p className="section-subtitle">The team behind MoneyMate</p>
+      <p className="section-subtitle">{aboutData.title}</p>
 
       <div className="about-content">
-        <p>
-          MoneyMate was founded with a mission to simplify personal finance for
-          everyone. Whether you're trying to save, budget better, or understand
-          your expenses — we’re here to help.
-        </p>
-
-        <p>
-          Our tools are built for ease of use and data clarity. With our secure
-          platform, you stay in control of your money, every step of the way.
-        </p>
-
-        <p>
-          We’re passionate about empowering individuals and small businesses to
-          take charge of their financial future — because managing money
-          shouldn’t be hard.
-        </p>
+        {aboutData.content[0]
+          .split("\r\n\r\n")
+          .map((para, index) => (
+            <p key={index}>{para}</p>
+          ))}
       </div>
     </section>
   );

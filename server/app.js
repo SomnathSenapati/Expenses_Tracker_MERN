@@ -55,4 +55,22 @@ app.use("/api", IncomeRouter);
 const ExpenseRouter = require("./app/routes/expenses/expenseRoute");
 app.use("/api", ExpenseRouter);
 
+const aboutApiRoute = require("./app/routes/api/aboutApiRoute");
+app.use("/api", aboutApiRoute);
+
+const pricingApiRoute = require("./app/routes/api/PricingApiRoute");
+app.use("/api", pricingApiRoute);
+
+const featuresApiRoute = require("./app/routes/api/featuresApiRoute");
+app.use("/api", featuresApiRoute);
+
+const servicesApiRoute = require("./app/routes/api/servicesApiRoute");
+app.use("/api", servicesApiRoute);
+
+const contactApiRoute = require("./app/routes/api/contactApiRoute");
+app.use("/api", contactApiRoute);
+
+const homeApiRoute = require("./app/routes/api/homeApiRoute");
+app.use("/api", homeApiRoute);
+
 module.exports = app;

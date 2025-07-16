@@ -1,38 +1,47 @@
-const pricingPlans = [
-  {
-    name: "Basic",
-    price: "Free",
-    features: ["Track Expenses", "Set Budgets", "Basic Analytics"],
-    button: "Get Started",
-    popular: false,
-  },
-  {
-    name: "Pro",
-    price: "$9.99/mo",
-    features: [
-      "Everything in Basic",
-      "Advanced Reports",
-      "Email Reminders",
-      "Goal Tracking",
-    ],
-    button: "Upgrade Now",
-    popular: true,
-  },
-  {
-    name: "Premium",
-    price: "$19.99/mo",
-    features: [
-      "Everything in Pro",
-      "Bank Integration",
-      "24/7 Support",
-      "Export to Excel/PDF",
-    ],
-    button: "Go Premium",
-    popular: false,
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Pricing = () => {
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:2809/api/pricing/list"
+        );
+
+        if (response.data.status && response.data.data.length > 0) {
+          // Filter active plans only
+          const activePlans = response.data.data.filter(
+            (plan) => plan.isActive
+          );
+          setPlans(activePlans);
+        } else {
+          setError("No pricing plans found.");
+        }
+      } catch (err) {
+        setError("Failed to load pricing plans.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
+  const parseFeatures = (features) => {
+    return features
+      .flatMap((f) => f.split(","))
+      .map((f) => f.trim())
+      .filter((f) => f.length > 0);
+  };
+
+  if (loading) return <p>Loading Pricing Plans...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <section className="pricing-section">
       <h2 className="section-title">Choose Your Plan</h2>
@@ -41,20 +50,22 @@ const Pricing = () => {
       </p>
 
       <div className="pricing-grid">
-        {pricingPlans.map((plan, index) => (
+        {plans.map((plan, index) => (
           <div
             className={`pricing-card ${plan.popular ? "popular" : ""}`}
-            key={index}
+            key={plan._id || index}
           >
             {plan.popular && <div className="badge">Most Popular</div>}
             <h3 className="plan-name">{plan.name}</h3>
-            <p className="plan-price">{plan.price}</p>
+            <p className="plan-price">{plan.price.trim()}</p>
             <ul className="plan-features">
-              {plan.features.map((feature, i) => (
-                <li key={i}>✔ {feature}</li>
+              {parseFeatures(plan.features).map((feature, i) => (
+                <li key={i}>{feature}</li>
               ))}
             </ul>
-            <button className="btn-primary full-width">{plan.button}</button>
+            <button className="btn-primary full-width">
+              {plan.button.trim()}
+            </button>
           </div>
         ))}
       </div>

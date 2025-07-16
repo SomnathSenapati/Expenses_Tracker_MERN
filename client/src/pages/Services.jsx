@@ -1,41 +1,39 @@
-const servicesData = [
-  {
-    title: "Expense Tracking",
-    description:
-      "Easily log your daily expenses and categorize them for better visibility.",
-    icon: "💸",
-  },
-  {
-    title: "Smart Budgeting",
-    description:
-      "Set monthly budgets and get alerts when you're nearing your limits.",
-    icon: "📊",
-  },
-  {
-    title: "Financial Reports",
-    description:
-      "Visualize your spending trends with interactive charts and graphs.",
-    icon: "📈",
-  },
-  {
-    title: "Secure Backup",
-    description:
-      "All your data is securely backed up in the cloud and protected by encryption.",
-    icon: "🔐",
-  },
-  {
-    title: "Multi-Device Sync",
-    description: "Access your data from mobile, tablet, or desktop seamlessly.",
-    icon: "🔄",
-  },
-  {
-    title: "Goal Tracking",
-    description: "Set savings goals and track your progress automatically.",
-    icon: "🎯",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Services = () => {
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:2809/api/service/list"
+        );
+
+        if (response.data.status && response.data.data.length > 0) {
+          const activeServices = response.data.data.filter(
+            (service) => service.isActive
+          );
+          setServices(activeServices);
+        } else {
+          setError("No services available.");
+        }
+      } catch (err) {
+        setError("Failed to load services.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  if (loading) return <p>Loading services...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <section className="services-section">
       <h2 className="section-title">Our Services</h2>
@@ -44,8 +42,8 @@ const Services = () => {
       </p>
 
       <div className="services-grid">
-        {servicesData.map((service, index) => (
-          <div className="service-card" key={index}>
+        {services.map((service) => (
+          <div className="service-card" key={service._id}>
             <div className="service-icon">{service.icon}</div>
             <h3>{service.title}</h3>
             <p>{service.description}</p>

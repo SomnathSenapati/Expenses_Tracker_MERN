@@ -694,6 +694,109 @@ a {
     border-color: #ff6b42;
     outline: none;
 }
+.contact-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px 20px;
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.contact-wrapper .section-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ff6b42;
+    text-align: center;
+}
+
+.contact-wrapper .section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #ccc;
+    text-align: center;
+}
+
+.contact-wrapper .contact-info {
+    background-color: #2a2a2a;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-left: 4px solid #ff6b42;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+.contact-wrapper .contact-info p {
+    margin: 10px 0;
+}
+
+.contact-wrapper .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-wrapper .contact-form input,
+.contact-wrapper .contact-form textarea {
+    padding: 12px 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #2a2a2a;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-wrapper .contact-form input:focus,
+.contact-wrapper .contact-form textarea:focus {
+    border-color: #ff6b42;
+    outline: none;
+}
+
+.contact-wrapper .btn-primary {
+    background-color: #ff6b42;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.contact-wrapper .btn-primary:hover {
+    background-color: #e65a34;
+}
+
+.contact-wrapper .form-status {
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .contact-wrapper {
+        padding: 20px 15px;
+    }
+
+    .contact-wrapper .section-title {
+        font-size: 1.5rem;
+    }
+
+    .contact-wrapper .section-subtitle {
+        font-size: 1rem;
+    }
+}
 
 /* Dashboard Cards */
 .dashboard-cards {

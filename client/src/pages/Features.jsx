@@ -1,43 +1,37 @@
-const featuresData = [
-  {
-    title: "Real-Time Dashboard",
-    description:
-      "Monitor your expenses, budgets, and savings progress live from one central dashboard.",
-    icon: "📊",
-  },
-  {
-    title: "Automatic Categorization",
-    description:
-      "Smart categorization of transactions so you can understand your spending better.",
-    icon: "🧠",
-  },
-  {
-    title: "Reminders & Notifications",
-    description:
-      "Get notified before bill due dates or when nearing budget limits.",
-    icon: "⏰",
-  },
-  {
-    title: "Dark Mode",
-    description:
-      "Reduce eye strain with our beautiful and user-friendly dark interface.",
-    icon: "🌙",
-  },
-  {
-    title: "Export Reports",
-    description:
-      "Download your reports in PDF/Excel format to review or share with others.",
-    icon: "📁",
-  },
-  {
-    title: "Bank Integration",
-    description:
-      "Connect your bank accounts securely for seamless transaction syncing.",
-    icon: "🏦",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Features = () => {
+  const [features, setFeatures] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchFeatures = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:2809/api/features/list"
+        );
+
+        if (response.data.status && response.data.data.length > 0) {
+          const activeFeatures = response.data.data.filter((f) => f.isActive);
+          setFeatures(activeFeatures);
+        } else {
+          setError("No features available.");
+        }
+      } catch (err) {
+        setError("Failed to load features.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeatures();
+  }, []);
+
+  if (loading) return <p>Loading features...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <section className="features-section">
       <h2 className="section-title">Awesome Features</h2>
@@ -46,8 +40,8 @@ const Features = () => {
       </p>
 
       <div className="features-grid">
-        {featuresData.map((feature, index) => (
-          <div className="feature-card" key={index}>
+        {features.map((feature) => (
+          <div className="feature-card" key={feature._id}>
             <div className="feature-icon">{feature.icon}</div>
             <h3>{feature.title}</h3>
             <p>{feature.description}</p>
