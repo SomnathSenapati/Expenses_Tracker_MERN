@@ -28,7 +28,7 @@ const HeroSection = () => {
         <div className="brands">
           <img src="/logo.png" alt="brand" />
           <img src="/rb.png" alt="brand" />
-          <img src="/brands/praxair.png" alt="brand" />
+          <img src="/scon.png" alt="brand" />
           <img src="/brands/solarcity.png" alt="brand" />
           <img src="/brands/connex.png" alt="brand" />
           <img src="/brands/brickworks.png" alt="brand" />

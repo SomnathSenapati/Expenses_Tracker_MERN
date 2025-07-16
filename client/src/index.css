@@ -94,6 +94,31 @@ a {
     background-color: #e65a34;
 }
 
+.btn-action {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-income {
+    background-color: #43a047;
+}
+
+.btn-income:hover {
+    background-color: #2e7d32;
+}
+
+.btn-expense {
+    background-color: #e53935;
+}
+
+.btn-expense:hover {
+    background-color: #b71c1c;
+}
+
 /* ========== FOOTER ========== */
 .footer {
     text-align: center;
@@ -849,16 +874,16 @@ a {
 
 .dropdown-menu {
     position: absolute;
-    top: 2.5rem;
-    right: 0;
+    top: 3.5rem;
+    right: 1rem;
     background-color: #2a2a2a;
     border: 1px solid #444;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     z-index: 999;
     display: flex;
     flex-direction: column;
-    min-width: 120px;
+    min-width: 150px;
 }
 
 .dropdown-item {
@@ -888,17 +913,6 @@ a {
     display: flex;
     align-items: center;
     cursor: pointer;
-}
-
-.dropdown-menu {
-    position: absolute;
-    background-color: #333;
-    right: 1rem;
-    top: 3.5rem;
-    border-radius: 5px;
-    padding: 0.5rem 0;
-    min-width: 150px;
-    z-index: 999;
 }
 
 .dropdown-item {
@@ -942,8 +956,99 @@ a {
 .profile-card strong {
     color: #ff6b42;
 }
-/* ========== RESPONSIVE ========== */
+/* ========== ADD INCOME / ADD EXPENSE FORM STYLING ========== */
+.form-container {
+    max-width: 500px;
+    margin: 4rem auto;
+    background-color: #1c1c1c;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    color: #fff;
+}
 
+.form-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #ff6b42;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6b42;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Submit Button */
+.btn-primary.full-width {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #ff6b42;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary.full-width:hover {
+    background-color: #e65a34;
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+    .form-container {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .btn-primary.full-width {
+        font-size: 0.95rem;
+    }
+}
 /* ========== RESPONSIVE ========== */
 
 /* ========== RESPONSIVE ========== */

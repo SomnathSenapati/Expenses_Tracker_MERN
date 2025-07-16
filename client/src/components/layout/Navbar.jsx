@@ -93,33 +93,51 @@ const Navbar = () => {
             </Link>
           </>
         ) : (
-          <div className="profile-dropdown">
+          <>
+            {/* Add Income and Add Expense Buttons */}
             <div
-              className="welcome-text"
-              onClick={() => setShowDropdown((prev) => !prev)}
+              className="action-buttons"
+              style={{ display: "flex", gap: "10px", marginRight: "20px" }}
             >
-              Welcome, {userName}
-              <span
-                className="profile-icon"
-                style={{ marginLeft: "8px", cursor: "pointer" }}
-              >
-                👤
-              </span>
+              <Link to="/add-income" className="btn-action btn-income">
+                Add Income
+              </Link>
+              <Link to="/add-expense" className="btn-action btn-expense">
+                Add Expense
+              </Link>
             </div>
-            {showDropdown && (
-              <div className="dropdown-menu">
-                <Link to="/profile" className="dropdown-item">
-                  Profile
-                </Link>
-                <button
-                  className="dropdown-item logout-btn"
-                  onClick={handleLogout}
+
+            <div className="profile-dropdown">
+              <div
+                className="welcome-text"
+                onClick={() => setShowDropdown((prev) => !prev)}
+              >
+                Welcome, {userName}
+                <span
+                  className="profile-icon"
+                  style={{ marginLeft: "8px", cursor: "pointer" }}
                 >
-                  Logout
-                </button>
+                  👤
+                </span>
               </div>
-            )}
-          </div>
+              {showDropdown && (
+                <div className="dropdown-menu">
+                  <Link to="/dashboard" className="dropdown-item">
+                    Dashboard
+                  </Link>
+                  <Link to="/profile" className="dropdown-item">
+                    Profile
+                  </Link>
+                  <button
+                    className="dropdown-item logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
         )}
       </div>
     </nav>

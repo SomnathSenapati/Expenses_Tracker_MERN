@@ -13,6 +13,8 @@ import AboutUs from "../pages/AboutUs";
 import Dasdboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
 import Profile from "../pages/Profile";
+import AddIncome from "../pages/AddIncome";
+import AddExpense from "../pages/AddExpense";
 
 const Routing = () => {
   return (
@@ -30,9 +32,11 @@ const Routing = () => {
           <Route path="/features" element={<Features />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/dashboard" element={<Dasdboard />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/dashboard" element={<Dasdboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/add-income" element={<AddIncome />} />
+          <Route path="/add-expense" element={<AddExpense/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
