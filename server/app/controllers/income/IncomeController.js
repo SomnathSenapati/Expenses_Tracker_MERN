@@ -49,9 +49,12 @@ class IncomeController {
   }
   // fetch all income
   async AllIncome(req, res) {
-    const {page} = req.query
+    const { page } = req.query;
     try {
-      const income = await incomeModel.paginate({}, { limit: 10, page: Number(page) });
+      const income = await incomeModel.paginate(
+        {},
+        { limit: 10, page: Number(page) }
+      );
       return res.status(httpStatusCode.Ok).json({
         status: true,
         message: "All Income Fetch Successfully",
@@ -71,11 +74,26 @@ class IncomeController {
   // fetch single income
   async editIncome(req, res) {
     try {
-      const id = req.params.id;
-      const income = await incomeModel.findById(id);
+      const incomeId = req.params.id;
+      if (!incomeId) {
+        return res.status(400).json({
+          status: false,
+          message: "Income ID is required",
+        });
+      }
+
+      const income = await incomeModel.findById(incomeId);
+
+      if (!income) {
+        return res.status(404).json({
+          status: false,
+          message: "Income not found",
+        });
+      }
+
       return res.status(httpStatusCode.Ok).json({
         status: true,
-        message: "Income Fetch Successfully",
+        message: "Income fetched successfully",
         data: income,
       });
     } catch (error) {

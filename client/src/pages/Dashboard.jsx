@@ -5,14 +5,16 @@ const Dashboard = () => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [incomePage, setIncomePage] = useState(1);
+  const [expensePage, setExpensePage] = useState(1);
   const [totalIncomePages, setTotalIncomePages] = useState(1);
+  const [totalExpensePages, setTotalExpensePages] = useState(1);
 
   const token = localStorage.getItem("token");
 
   const fetchIncome = async (page = 1) => {
     try {
       const res = await axios.get(
-        `http://localhost:2809/api/income/user?page=${page}`,
+        `http://localhost:2809/api/income?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -29,15 +31,21 @@ const Dashboard = () => {
     }
   };
 
-  const fetchExpenses = async () => {
+  const fetchExpenses = async (page = 1) => {
     try {
-      const res = await axios.get("http://localhost:2809/api/expense/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `http://localhost:2809/api/expense?page=${page}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      setExpenses(res.data?.docs || []);
+      const expenseData = res.data.expense;
+      setExpenses(expenseData.docs);
+      setExpensePage(expenseData.page);
+      setTotalExpensePages(expenseData.totalPages);
     } catch (err) {
       console.error("Failed to fetch expenses:", err);
     }
@@ -45,23 +53,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchIncome(incomePage);
-    fetchExpenses();
+    fetchExpenses(expensePage);
   }, []);
 
   const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
   const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
   const balance = totalIncome - totalExpense;
 
-  const handlePrev = () => {
-    if (incomePage > 1) {
-      fetchIncome(incomePage - 1);
-    }
+  // Pagination handlers
+  const handleIncomePrev = () => {
+    if (incomePage > 1) fetchIncome(incomePage - 1);
   };
 
-  const handleNext = () => {
-    if (incomePage < totalIncomePages) {
-      fetchIncome(incomePage + 1);
-    }
+  const handleIncomeNext = () => {
+    if (incomePage < totalIncomePages) fetchIncome(incomePage + 1);
+  };
+
+  const handleExpensePrev = () => {
+    if (expensePage > 1) fetchExpenses(expensePage - 1);
+  };
+
+  const handleExpenseNext = () => {
+    if (expensePage < totalExpensePages) fetchExpenses(expensePage + 1);
   };
 
   return (
@@ -101,14 +114,14 @@ const Dashboard = () => {
 
           <div style={{ marginTop: "1rem", display: "flex", gap: "1rem" }}>
             <button
-              onClick={handlePrev}
+              onClick={handleIncomePrev}
               disabled={incomePage <= 1}
               className="btn-secondary"
             >
               Prev
             </button>
             <button
-              onClick={handleNext}
+              onClick={handleIncomeNext}
               disabled={incomePage >= totalIncomePages}
               className="btn-secondary"
             >
@@ -118,19 +131,35 @@ const Dashboard = () => {
         </div>
 
         <div className="transactions">
-          <h4>Recent Expenses</h4>
+          <h4>
+            Recent Expenses (Page {expensePage} of {totalExpensePages})
+          </h4>
           {expenses.length === 0 ? (
             <p>No expense records found.</p>
           ) : (
-            expenses
-              .slice(-5)
-              .reverse()
-              .map((item) => (
-                <p key={item._id}>
-                  {item.title} — ₹{item.amount}
-                </p>
-              ))
+            expenses.slice(0, 5).map((item) => (
+              <p key={item._id}>
+                {item.title} — ₹{item.amount}
+              </p>
+            ))
           )}
+
+          <div style={{ marginTop: "1rem", display: "flex", gap: "1rem" }}>
+            <button
+              onClick={handleExpensePrev}
+              disabled={expensePage <= 1}
+              className="btn-secondary"
+            >
+              Prev
+            </button>
+            <button
+              onClick={handleExpenseNext}
+              disabled={expensePage >= totalExpensePages}
+              className="btn-secondary"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

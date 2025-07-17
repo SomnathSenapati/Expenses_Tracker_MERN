@@ -1,5 +1,7 @@
 const httpStatusCode = require("../../helper/httpStatusCode");
 const { hashedPassword, comparePassword } = require("../../middleware/auth");
+const expenseModel = require("../../model/expense");
+const incomeModel = require("../../model/income");
 const userModel = require("../../model/user");
 const jwt = require("jsonwebtoken");
 
@@ -140,6 +142,34 @@ class UserAuthController {
       });
     } catch (error) {
       return res.status(ErrorCode.internalServerError).json({
+        status: false,
+        message: error.message,
+      });
+    }
+  }
+  async dashboard(req, res) {
+    try {
+      const userId = req.params.id;
+      // console.log(userId)
+
+      const income = await incomeModel.aggregate([
+        { $match: { user: userId } },
+      ]);
+
+      const expense = await expenseModel.aggregate([
+        { $match: { user: userId } },
+      ]);
+
+      return res.status(httpStatusCode.Ok).json({
+        status: true,
+        message: "User dashboard data retrieved successfully.",
+        totalIncome: income.length,
+        income: income,
+        totalExpense: expense.length,
+        expense: expense,
+      });
+    } catch (error) {
+      return res.status(httpStatusCode.InternalServerError).json({
         status: false,
         message: error.message,
       });
