@@ -4,17 +4,15 @@ import axios from "axios";
 const Dashboard = () => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
-  const [incomePage, setIncomePage] = useState(1);
-  const [expensePage, setExpensePage] = useState(1);
-  const [totalIncomePages, setTotalIncomePages] = useState(1);
-  const [totalExpensePages, setTotalExpensePages] = useState(1);
 
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userid = user?._id;
 
-  const fetchIncome = async (page = 1) => {
+  const fetchDashboardData = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:2809/api/income?page=${page}`,
+        `http://localhost:2809/api/user/dashboard/${userid}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -22,60 +20,29 @@ const Dashboard = () => {
         }
       );
 
-      const incomeData = res.data.income;
-      setIncomes(incomeData.docs);
-      setIncomePage(incomeData.page);
-      setTotalIncomePages(incomeData.totalPages);
+      setIncomes(res.data.income || []);
+      setExpenses(res.data.expense || []);
     } catch (err) {
-      console.error("Failed to fetch incomes:", err);
-    }
-  };
-
-  const fetchExpenses = async (page = 1) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:2809/api/expense?page=${page}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const expenseData = res.data.expense;
-      setExpenses(expenseData.docs);
-      setExpensePage(expenseData.page);
-      setTotalExpensePages(expenseData.totalPages);
-    } catch (err) {
-      console.error("Failed to fetch expenses:", err);
+      console.error("Failed to fetch dashboard data:", err);
     }
   };
 
   useEffect(() => {
-    fetchIncome(incomePage);
-    fetchExpenses(expensePage);
-  }, []);
+    if (userid && token) {
+      fetchDashboardData();
+    }
+  }, [userid, token]);
 
   const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
   const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
   const balance = totalIncome - totalExpense;
 
-  // Pagination handlers
-  const handleIncomePrev = () => {
-    if (incomePage > 1) fetchIncome(incomePage - 1);
-  };
-
-  const handleIncomeNext = () => {
-    if (incomePage < totalIncomePages) fetchIncome(incomePage + 1);
-  };
-
-  const handleExpensePrev = () => {
-    if (expensePage > 1) fetchExpenses(expensePage - 1);
-  };
-
-  const handleExpenseNext = () => {
-    if (expensePage < totalExpensePages) fetchExpenses(expensePage + 1);
-  };
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
 
   return (
     <div className="dashboard-section">
@@ -99,67 +66,63 @@ const Dashboard = () => {
 
       <div className="dashboard-lists">
         <div className="transactions">
-          <h4>
-            Recent Incomes (Page {incomePage} of {totalIncomePages})
-          </h4>
+          <h4>Recent Incomes</h4>
           {incomes.length === 0 ? (
             <p>No income records found.</p>
           ) : (
-            incomes.slice(0, 5).map((item) => (
-              <p key={item._id}>
-                {item.title} — ₹{item.amount}
-              </p>
-            ))
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {incomes.map((item) => (
+                  <tr key={item._id}>
+                    <td>{formatDate(item.createdAt)}</td>
+                    <td>{item.title}</td>
+                    <td>{item.description}</td>
+                    <td>{item.type}</td>
+                    <td>₹{item.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
-
-          <div style={{ marginTop: "1rem", display: "flex", gap: "1rem" }}>
-            <button
-              onClick={handleIncomePrev}
-              disabled={incomePage <= 1}
-              className="btn-secondary"
-            >
-              Prev
-            </button>
-            <button
-              onClick={handleIncomeNext}
-              disabled={incomePage >= totalIncomePages}
-              className="btn-secondary"
-            >
-              Next
-            </button>
-          </div>
         </div>
 
         <div className="transactions">
-          <h4>
-            Recent Expenses (Page {expensePage} of {totalExpensePages})
-          </h4>
+          <h4>Recent Expenses</h4>
           {expenses.length === 0 ? (
             <p>No expense records found.</p>
           ) : (
-            expenses.slice(0, 5).map((item) => (
-              <p key={item._id}>
-                {item.title} — ₹{item.amount}
-              </p>
-            ))
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {expenses.map((item) => (
+                  <tr key={item._id}>
+                    <td>{formatDate(item.createdAt)}</td>
+                    <td>{item.title}</td>
+                    <td>{item.description}</td>
+                    <td>{item.type}</td>
+                    <td>₹{item.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
-
-          <div style={{ marginTop: "1rem", display: "flex", gap: "1rem" }}>
-            <button
-              onClick={handleExpensePrev}
-              disabled={expensePage <= 1}
-              className="btn-secondary"
-            >
-              Prev
-            </button>
-            <button
-              onClick={handleExpenseNext}
-              disabled={expensePage >= totalExpensePages}
-              className="btn-secondary"
-            >
-              Next
-            </button>
-          </div>
         </div>
       </div>
     </div>

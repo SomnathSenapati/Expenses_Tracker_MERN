@@ -1049,6 +1049,21 @@ textarea {
         font-size: 0.95rem;
     }
 }
-/* ========== RESPONSIVE ========== */
+/* ========== DASHBOARD TABLE ========== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
 
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: green;
+}
 /* ========== RESPONSIVE ========== */

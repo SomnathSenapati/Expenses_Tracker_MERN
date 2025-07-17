@@ -1,3 +1,4 @@
+const { mongoose } = require("mongoose");
 const httpStatusCode = require("../../helper/httpStatusCode");
 const { hashedPassword, comparePassword } = require("../../middleware/auth");
 const expenseModel = require("../../model/expense");
@@ -151,13 +152,15 @@ class UserAuthController {
     try {
       const userId = req.params.id;
       // console.log(userId)
-
+      const objectUserId = new mongoose.Types.ObjectId(userId);
+      // console.log(objectUserId)
+      
       const income = await incomeModel.aggregate([
-        { $match: { user: userId } },
+        { $match: { user: objectUserId } },
       ]);
 
       const expense = await expenseModel.aggregate([
-        { $match: { user: userId } },
+        { $match: { user: objectUserId } },
       ]);
 
       return res.status(httpStatusCode.Ok).json({
