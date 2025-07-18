@@ -15,6 +15,7 @@ import Contact from "../pages/Contact";
 import Profile from "../pages/Profile";
 import AddIncome from "../pages/AddIncome";
 import AddExpense from "../pages/AddExpense";
+import CheckoutPage from "../pages/CheckOutPage";
 
 const Routing = () => {
   return (
@@ -22,10 +23,8 @@ const Routing = () => {
       <Navbar />
       <div style={{ paddingBottom: "60px" }}>
         {" "}
-        {/* to prevent footer overlap */}
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/services" element={<Services />} />
@@ -36,7 +35,8 @@ const Routing = () => {
           <Route path="/dashboard" element={<Dasdboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/add-income" element={<AddIncome />} />
-          <Route path="/add-expense" element={<AddExpense/>} />
+          <Route path="/add-expense" element={<AddExpense />} />
+          <Route path="/checkout/:planId" element={<CheckoutPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

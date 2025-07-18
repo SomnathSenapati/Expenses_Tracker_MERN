@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Pricing = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -14,7 +16,6 @@ const Pricing = () => {
         );
 
         if (response.data.status && response.data.data.length > 0) {
-          // Filter active plans only
           const activePlans = response.data.data.filter(
             (plan) => plan.isActive
           );
@@ -37,6 +38,11 @@ const Pricing = () => {
       .flatMap((f) => f.split(","))
       .map((f) => f.trim())
       .filter((f) => f.length > 0);
+  };
+
+  const handlePlanClick = (plan) => {
+    // Navigate to the checkout page with plan ID
+    navigate(`/checkout/${plan._id}`);
   };
 
   if (loading) return <p>Loading Pricing Plans...</p>;
@@ -63,7 +69,10 @@ const Pricing = () => {
                 <li key={i}>{feature}</li>
               ))}
             </ul>
-            <button className="btn-primary full-width">
+            <button
+              className="btn-primary full-width"
+              onClick={() => handlePlanClick(plan)}
+            >
               {plan.button.trim()}
             </button>
           </div>

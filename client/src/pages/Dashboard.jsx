@@ -43,6 +43,34 @@ const Dashboard = () => {
       month: "short",
       day: "numeric",
     });
+    
+    const handleEdit = (item, type) => {
+      console.log("Edit", type, item);
+    };
+
+    const handleDelete = async (id, type) => {
+      try {
+        const endpoint =
+          type === "income"
+            ? `http://localhost:2809/api/income/${id}`
+            : `http://localhost:2809/api/expense/${id}`;
+
+        await axios.delete(endpoint, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (type === "income") {
+          setIncomes((prev) => prev.filter((item) => item._id !== id));
+        } else {
+          setExpenses((prev) => prev.filter((item) => item._id !== id));
+        }
+      } catch (error) {
+        console.error(`Failed to delete ${type}:`, error);
+      }
+    };
+
 
   return (
     <div className="dashboard-section">
@@ -70,7 +98,8 @@ const Dashboard = () => {
           {incomes.length === 0 ? (
             <p>No income records found.</p>
           ) : (
-            <table>
+            <table className="income-table">
+              {" "}
               <thead>
                 <tr>
                   <th>Date</th>
@@ -78,6 +107,7 @@ const Dashboard = () => {
                   <th>Description</th>
                   <th>Type</th>
                   <th>Amount</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,6 +118,20 @@ const Dashboard = () => {
                     <td>{item.description}</td>
                     <td>{item.type}</td>
                     <td>₹{item.amount}</td>
+                    <td>
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleEdit(item, "income")}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(item._id, "income")}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -100,7 +144,7 @@ const Dashboard = () => {
           {expenses.length === 0 ? (
             <p>No expense records found.</p>
           ) : (
-            <table>
+            <table className="expense-table">
               <thead>
                 <tr>
                   <th>Date</th>
@@ -108,6 +152,7 @@ const Dashboard = () => {
                   <th>Description</th>
                   <th>Type</th>
                   <th>Amount</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -118,6 +163,20 @@ const Dashboard = () => {
                     <td>{item.description}</td>
                     <td>{item.type}</td>
                     <td>₹{item.amount}</td>
+                    <td>
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleEdit(item, "expense")}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(item._id, "expense")}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

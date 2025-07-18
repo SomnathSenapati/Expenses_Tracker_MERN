@@ -4,5 +4,6 @@ const router = express.Router();
 
 
 router.get("/pricing/list", PricingApiController.pricinglist);
+router.get("/pricing/:id", PricingApiController.pricingId);
 
 module.exports = router;

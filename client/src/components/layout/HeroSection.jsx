@@ -29,7 +29,7 @@ const HeroSection = () => {
           <img src="/logo.png" alt="brand" />
           <img src="/rb.png" alt="brand" />
           <img src="/scon.png" alt="brand" />
-          <img src="/brands/solarcity.png" alt="brand" />
+          <img src="/Color-Paypal-Logo.jpg" alt="brand" />
           <img src="/brands/connex.png" alt="brand" />
           <img src="/brands/brickworks.png" alt="brand" />
         </div>

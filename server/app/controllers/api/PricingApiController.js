@@ -1,8 +1,8 @@
 const ErrorCode = require("../../helper/httpStatusCode");
+const pricingModel = require("../../model/admin/Pricing");
 const PricingModel = require("../../model/admin/Pricing");
 class PricingApiController {
-
-  //get all student
+  //get all plans
   async pricinglist(req, res) {
     try {
       //console.log(req.body);
@@ -19,6 +19,17 @@ class PricingApiController {
         status: false,
         message: error.message,
       });
+    }
+  }
+
+  async pricingId(req, res) {
+    try {
+      const plan = await pricingModel.findById(req.params.id);
+      if (!plan) return res.json({ status: false, message: "Plan not found" });
+
+      res.json({ status: true, data: plan });
+    } catch (error) {
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 }
