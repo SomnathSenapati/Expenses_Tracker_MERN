@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+const COLORS = ["#28a745", "#dc3545"];
 
 const List = () => {
   const [incomes, setIncomes] = useState([]);
@@ -27,7 +37,6 @@ const List = () => {
           },
         }
       );
-
       setIncomes(res.data.income || []);
       setExpenses(res.data.expense || []);
     } catch (err) {
@@ -75,10 +84,8 @@ const List = () => {
     }
   };
 
-  // 🔍 Filtering Logic
   const getFilteredData = () => {
     const now = new Date();
-
     const filterByDate = (item) => {
       const itemDate = new Date(item.createdAt);
       switch (dateFilter) {
@@ -113,7 +120,7 @@ const List = () => {
   useEffect(() => {
     const filtered = getFilteredData();
     setFilteredData(filtered);
-    setCurrentPage(1); // reset to page 1 on filter change
+    setCurrentPage(1);
   }, [incomes, expenses, dateFilter, typeFilter, categoryFilter]);
 
   const totalIncome = filteredData
@@ -125,8 +132,13 @@ const List = () => {
     .reduce((sum, e) => sum + e.amount, 0);
 
   const balance = totalIncome - totalExpense;
+  const turnover = totalIncome + totalExpense;
 
-  // Pagination calculation
+  const chartData = [
+    { name: "Income", value: totalIncome },
+    { name: "Expense", value: totalExpense },
+  ];
+
   const indexOfLast = currentPage * rowsPerPage;
   const indexOfFirst = indexOfLast - rowsPerPage;
   const currentRows = filteredData.slice(indexOfFirst, indexOfLast);
@@ -150,9 +162,36 @@ const List = () => {
           <h3>Balance</h3>
           <p>₹ {balance.toFixed(2)}</p>
         </div>
+        <div className="card">
+          <h3>Total Turnover</h3>
+          <p>₹ {turnover.toFixed(2)}</p>
+        </div>
       </div>
-
-      {/* 🔍 Filter Section */}
+      {/* pie chart */}
+      <div style={{ maxWidth: 500, margin: "auto", marginBottom: 20 }}>
+        <h4 style={{ textAlign: "center" }}>Income vs Expense</h4>
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#8884d8"
+              label
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      {/* filter */}
       <div
         className="filters"
         style={{
@@ -188,15 +227,18 @@ const List = () => {
         >
           <option value="all">All Categories</option>
           <option value="Salary">Salary</option>
+          <option value="Business">Business</option>
+          <option value="Investment">Investment</option>
+          <option value="Freelance">Freelance</option>
           <option value="Food">Food</option>
+          <option value="Transport">Transport</option>
           <option value="Bills">Bills</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Travel">Travel</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Health">Health</option>
           <option value="Other">Other</option>
         </select>
       </div>
 
-      {/* Transactions Table */}
       <div className="transactions">
         <h4>Filtered Transactions</h4>
         {currentRows.length === 0 ? (
@@ -218,7 +260,11 @@ const List = () => {
               {currentRows.map((item) => (
                 <tr
                   key={item._id}
-                  className={item.categoryType === "income" ? "income-row" : "expense-row"}
+                  className={
+                    item.categoryType === "income"
+                      ? "income-row"
+                      : "expense-row"
+                  }
                 >
                   <td>{formatDate(item.createdAt)}</td>
                   <td>{item.title}</td>
@@ -245,8 +291,6 @@ const List = () => {
             </tbody>
           </table>
         )}
-
-        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div
             className="pagination"
