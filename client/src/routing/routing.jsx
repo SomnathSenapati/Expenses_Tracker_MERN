@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
@@ -10,12 +9,14 @@ import Services from "../pages/Services";
 import Features from "../pages/Features";
 import Pricing from "../pages/Pricing";
 import AboutUs from "../pages/AboutUs";
-import Dasdboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
 import Profile from "../pages/Profile";
 import AddIncome from "../pages/AddIncome";
 import AddExpense from "../pages/AddExpense";
 import CheckoutPage from "../pages/CheckOutPage";
+import Dashboard from "../pages/Dashboard";
+import PrivateRoute from "../components/PrivateRoute";
+import List from "../pages/List";
 
 const Routing = () => {
   return (
@@ -32,11 +33,52 @@ const Routing = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/dashboard" element={<Dasdboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/add-income" element={<AddIncome />} />
-          <Route path="/add-expense" element={<AddExpense />} />
-          <Route path="/checkout/:planId" element={<CheckoutPage />} />
+
+          <Route path="/list" element={<List />} />
+
+          {/* protect route */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/add-income"
+            element={
+              <PrivateRoute>
+                <AddIncome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/add-expense"
+            element={
+              <PrivateRoute>
+                <AddExpense />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/checkout/:planId"
+            element={
+              <PrivateRoute>
+                <CheckoutPage />
+              </PrivateRoute>
+            }
+          />
+
+          {/* all else route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

@@ -824,6 +824,20 @@ a {
 }
 
 /* Dashboard Cards */
+.month-year-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+.month-year-filter select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
 .dashboard-cards {
     display: flex;
     flex-wrap: wrap;
@@ -1103,6 +1117,37 @@ td {
     background-color: #dc3545;
     color: white;
 }
+.view-transaction-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px;
+    margin-left: 78vh;
+}
+
+.view-transaction-btn:hover {
+    background-color: #0056b3;
+    /* Darker on hover */
+}
+.income-row {
+    background-color: #e6f9ec;
+    /* light green */
+    color: #2e7d32;
+    /* dark green text */
+}
+
+.expense-row {
+    background-color: #fce8e6;
+    /* light red */
+    color: #c62828;
+    /* dark red text */
+}
 /* ========== CHECKOUTPAGE ========== */
 .checkout-page {
     max-width: 500px;
@@ -1136,4 +1181,33 @@ ul {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* list */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: #f5f7fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.filters select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.filters select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }

@@ -30,8 +30,8 @@ const HeroSection = () => {
           <img src="/rb.png" alt="brand" />
           <img src="/scon.png" alt="brand" />
           <img src="/Color-Paypal-Logo.jpg" alt="brand" />
-          <img src="/brands/connex.png" alt="brand" />
-          <img src="/brands/brickworks.png" alt="brand" />
+          <img src="/Zerodha_Kite_logo.svg.png" alt="brand" />
+          <img src="/unnamed.jpg" alt="brand" />
         </div>
       </div>
       <div className = "hero-analytics">
