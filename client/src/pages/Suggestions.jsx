@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Suggestions = ({ userId }) => {
+const Suggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(
-          `http://localhost:2809/api/suggestions/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+
+        const res = await axios.get(`http://localhost:2809/api/suggestions`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setSuggestions(res.data.suggestions);
       } catch (err) {
@@ -24,7 +22,7 @@ const Suggestions = ({ userId }) => {
     };
 
     fetchSuggestions();
-  }, [userId]);
+  }, []);
 
   return (
     <div className="suggestion-box">

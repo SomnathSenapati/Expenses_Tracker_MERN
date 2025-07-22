@@ -196,7 +196,7 @@ const List = () => {
 
       {/* Smart Budget Button */}
       <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-        <Link to="/sug">
+        <Link to={`/suggestion`}>
           <button
             style={{
               padding: "10px 20px",

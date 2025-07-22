@@ -37,7 +37,7 @@ const Routing = () => {
           <Route path="/contact" element={<Contact />} />
 
           <Route path="/list" element={<List />} />
-          <Route path="/sug" element={<Suggestions />} />
+          <Route path="/suggestion/" element={<Suggestions />} />
 
           {/* protect route */}
           <Route
