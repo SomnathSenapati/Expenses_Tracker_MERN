@@ -1,13 +1,24 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [infoMessage, setInfoMessage] = useState("");
+
+  // Show redirect message if any (from PrivateRoute)
+  useEffect(() => {
+    if (location.state?.message) {
+      setInfoMessage(location.state.message);
+      const timer = setTimeout(() => setInfoMessage(""), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -19,20 +30,18 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:2809/api/user/login", {
-        email: formData.email,
-        password: formData.password,
-      });
+      const res = await axios.post(
+        "http://localhost:2809/api/user/login",
+        formData
+      );
 
-      // Save token/user info if your backend returns it
       if (res.status === 200 && res.data) {
-        alert("Login successful!");
-
-        // Save token or user info in localStorage/session
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-
-        navigate("/dashboard"); // Redirect to dashboard or homepage
+        alert("Login successful!");
+        
+        const redirectPath = location.state?.from || "/dashboard";
+        navigate(redirectPath);
       }
     } catch (err) {
       console.error(err);
@@ -50,7 +59,22 @@ const Login = () => {
           Login to your <span className="brand-name">MoneyMate</span> account
         </p>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* Info banner for redirect notice */}
+        {infoMessage && (
+          <div
+            style={{
+              background: "#fff3cd",
+              color: "#856404",
+              padding: "10px",
+              borderRadius: "5px",
+              marginBottom: "10px",
+            }}
+          >
+            {infoMessage}
+          </div>
+        )}
+
+        {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
 
         <div className="form-group">
           <label>Email</label>

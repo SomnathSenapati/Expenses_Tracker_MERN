@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { Link } from "react-router-dom";
 
 const COLORS = ["#28a745", "#dc3545"];
 
@@ -113,7 +114,7 @@ const List = () => {
         typeFilter === "all" ? true : item.categoryType === typeFilter
       )
       .filter((item) =>
-        categoryFilter === "all" ? true : item.category === categoryFilter
+        categoryFilter === "all" ? true : item.type === categoryFilter
       );
   };
 
@@ -167,7 +168,8 @@ const List = () => {
           <p>₹ {turnover.toFixed(2)}</p>
         </div>
       </div>
-      {/* pie chart */}
+
+      {/* Pie Chart */}
       <div style={{ maxWidth: 500, margin: "auto", marginBottom: 20 }}>
         <h4 style={{ textAlign: "center" }}>Income vs Expense</h4>
         <ResponsiveContainer width="100%" height={300}>
@@ -191,7 +193,27 @@ const List = () => {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      {/* filter */}
+
+      {/* Smart Budget Button */}
+      <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+        <Link to="/sug">
+          <button
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#007bff",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            Smart Budgeting Suggestion
+          </button>
+        </Link>
+      </div>
+
+      {/* Filters */}
       <div
         className="filters"
         style={{
@@ -239,6 +261,7 @@ const List = () => {
         </select>
       </div>
 
+      {/* Table */}
       <div className="transactions">
         <h4>Filtered Transactions</h4>
         {currentRows.length === 0 ? (

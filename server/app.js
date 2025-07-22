@@ -55,6 +55,9 @@ app.use("/api", IncomeRouter);
 const ExpenseRouter = require("./app/routes/expenses/expenseRoute");
 app.use("/api", ExpenseRouter);
 
+const suggestionRoutes = require("./app/routes/suggestionRoutes");
+app.use("/api", suggestionRoutes);
+
 const aboutApiRoute = require("./app/routes/api/aboutApiRoute");
 app.use("/api", aboutApiRoute);
 

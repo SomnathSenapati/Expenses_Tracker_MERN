@@ -17,6 +17,8 @@ import CheckoutPage from "../pages/CheckOutPage";
 import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "../components/PrivateRoute";
 import List from "../pages/List";
+import ServiceDetails from "../pages/ServiceDetails";
+import Suggestions from "../pages/Suggestions";
 
 const Routing = () => {
   return (
@@ -35,6 +37,7 @@ const Routing = () => {
           <Route path="/contact" element={<Contact />} />
 
           <Route path="/list" element={<List />} />
+          <Route path="/sug" element={<Suggestions />} />
 
           {/* protect route */}
           <Route
@@ -74,6 +77,14 @@ const Routing = () => {
             element={
               <PrivateRoute>
                 <CheckoutPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/service/:id"
+            element={
+              <PrivateRoute>
+                <ServiceDetails />
               </PrivateRoute>
             }
           />

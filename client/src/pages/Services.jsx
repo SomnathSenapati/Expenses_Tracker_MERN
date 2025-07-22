@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -43,11 +44,15 @@ const Services = () => {
 
       <div className="services-grid">
         {services.map((service) => (
-          <div className="service-card" key={service._id}>
+          <Link
+            to={`/service/${service._id}`}
+            key={service._id}
+            className="service-card"
+          >
             <div className="service-icon">{service.icon}</div>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
