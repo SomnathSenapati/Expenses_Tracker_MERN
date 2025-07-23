@@ -19,6 +19,7 @@ import PrivateRoute from "../components/PrivateRoute";
 import List from "../pages/List";
 import ServiceDetails from "../pages/ServiceDetails";
 import Suggestions from "../pages/Suggestions";
+import EditTransaction from "../pages/EditTransaction";
 
 const Routing = () => {
   return (
@@ -85,6 +86,14 @@ const Routing = () => {
             element={
               <PrivateRoute>
                 <ServiceDetails />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/edit/:id/:type"
+            element={
+              <PrivateRoute>
+                <EditTransaction />
               </PrivateRoute>
             }
           />

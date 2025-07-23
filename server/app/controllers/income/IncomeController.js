@@ -1,5 +1,6 @@
 const incomeModel = require("../../model/income");
 const httpStatusCode = require("../../helper/httpStatusCode");
+const PDFDocument = require("pdfkit");
 
 class IncomeController {
   // Create Income
@@ -140,6 +141,43 @@ class IncomeController {
       });
     }
   }
+
+  // async downloadIncomePDF (req, res){
+  //   try {
+  //     const incomes = await incomeModel.find({ user: req.user.id });
+
+  //     const doc = new PDFDocument();
+  //     res.setHeader("Content-Type", "application/pdf");
+  //     res.setHeader(
+  //       "Content-Disposition",
+  //       "attachment; filename=income_data.pdf"
+  //     );
+
+  //     doc.pipe(res);
+
+  //     doc.fontSize(20).text("Income List", { underline: true });
+  //     doc.moveDown();
+
+  //     incomes.forEach((item, index) => {
+  //       doc
+  //         .fontSize(12)
+  //         .text(
+  //           `${index + 1}. Title: ${item.title}\n   Type: ${
+  //             item.type
+  //           }\n   Amount: ₹${item.amount}\n   Date: ${new Date(
+  //             item.createdAt
+  //           ).toLocaleDateString()}`,
+  //           { lineGap: 4 }
+  //         );
+  //       doc.moveDown();
+  //     });
+
+  //     doc.end();
+  //   } catch (error) {
+  //     console.error("PDF Export Error:", error);
+  //     res.status(500).json({ message: "Failed to export data to PDF" });
+  //   }
+  // }
 }
 
 module.exports = new IncomeController();

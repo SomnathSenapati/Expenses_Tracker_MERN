@@ -76,4 +76,7 @@ app.use("/api", contactApiRoute);
 const homeApiRoute = require("./app/routes/api/homeApiRoute");
 app.use("/api", homeApiRoute);
 
+const transactionRoutes = require("./app/routes/api/transactionRoutes");
+app.use("/api", transactionRoutes);
+
 module.exports = app;

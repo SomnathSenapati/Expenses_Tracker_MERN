@@ -9,6 +9,34 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Link } from "react-router-dom";
+ import { useNavigate } from "react-router-dom";
+ import { toast } from "react-toastify";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
+const downloadPDF = (data) => {
+  const doc = new jsPDF();
+
+  doc.setFontSize(16);
+  doc.text("Transaction List", 14, 20);
+
+  const headers = [["Title", "Description", "Type", "Amount", "Date"]];
+  const rows = data.map((item) => [
+    item.title,
+    item.description,
+    item.categoryType,
+    `₹${item.amount}`,
+    new Date(item.createdAt).toLocaleDateString(),
+  ]);
+
+  autoTable(doc, {
+    head: headers,
+    body: rows,
+    startY: 30,
+  });
+
+  doc.save("transactions.pdf");
+};
 
 const COLORS = ["#28a745", "#dc3545"];
 
@@ -58,16 +86,19 @@ const List = () => {
       day: "numeric",
     });
 
+  const navigate = useNavigate();
+
   const handleEdit = (item, type) => {
-    console.log("Edit", type, item);
+    navigate(`/edit/${item._id}/${type}`, {
+      state: { data: item },
+    });
   };
 
   const handleDelete = async (id, type) => {
     try {
-      const endpoint =
-        type === "income"
-          ? `http://localhost:2809/api/income/${id}`
-          : `http://localhost:2809/api/expense/${id}`;
+      const token = localStorage.getItem("token");
+
+      const endpoint = `http://localhost:2809/api/transaction/${id}/${type}`;
 
       await axios.delete(endpoint, {
         headers: {
@@ -80,10 +111,14 @@ const List = () => {
       } else {
         setExpenses((prev) => prev.filter((item) => item._id !== id));
       }
+
+      toast.success(`${type} deleted successfully!`);
     } catch (error) {
       console.error(`Failed to delete ${type}:`, error);
+      toast.error("Failed to delete transaction");
     }
   };
+
 
   const getFilteredData = () => {
     const now = new Date();
@@ -264,6 +299,22 @@ const List = () => {
       {/* Table */}
       <div className="transactions">
         <h4>Filtered Transactions</h4>
+        <button
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontSize: "16px",
+          }}
+          onClick={() => downloadPDF(filteredData)}
+          className="bg-green-600 text-white px-4 py-2 rounded shadow"
+        >
+          Download PDF
+        </button>
+
         {currentRows.length === 0 ? (
           <p>No matching records found.</p>
         ) : (
