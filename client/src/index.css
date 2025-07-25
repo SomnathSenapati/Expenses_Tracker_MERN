@@ -1273,3 +1273,72 @@ ul {
 .edit-form button:hover {
     background-color: #0056b3;
 }
+
+/* pageNotFound */
+.pagenotfound-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f4ff, #ffe6f0);
+    padding: 20px;
+    text-align: center;
+}
+
+.pagenotfound-content {
+    max-width: 600px;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: 900;
+    color: #4f46e5;
+    animation: bounce 1.5s infinite;
+}
+
+.error-title {
+    font-size: 32px;
+    margin-top: -10px;
+    color: #333;
+}
+
+.error-message {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #666;
+}
+
+.home-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #4f46e5;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #4338ca;
+}
+
+.error-image {
+    margin-top: 40px;
+    max-width: 100%;
+    width: 300px;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}

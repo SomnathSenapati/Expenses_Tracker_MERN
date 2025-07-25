@@ -41,7 +41,6 @@ const Pricing = () => {
   };
 
   const handlePlanClick = (plan) => {
-    // Navigate to the checkout page with plan ID
     navigate(`/checkout/${plan._id}`);
   };
 

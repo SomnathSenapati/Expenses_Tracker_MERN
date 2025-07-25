@@ -68,7 +68,6 @@ const EditTransaction = () => {
     }
   };
 
-  // Suggest some example types
   const incomeTypes = [
     "Salary",
     "Business",

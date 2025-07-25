@@ -13,9 +13,8 @@ const AboutUs = () => {
           "http://localhost:2809/api/about/list"
         );
 
-        // Check if data exists and has at least one item
         if (response.data.status && response.data.data.length > 0) {
-          setAboutData(response.data.data[0]); // First item
+          setAboutData(response.data.data[0]); 
         } else {
           setError("No About Us data found.");
         }

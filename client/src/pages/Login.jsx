@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,7 +13,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const [infoMessage, setInfoMessage] = useState("");
 
-  // Show redirect message if any (from PrivateRoute)
   useEffect(() => {
     if (location.state?.message) {
       setInfoMessage(location.state.message);
@@ -38,10 +39,10 @@ const Login = () => {
       if (res.status === 200 && res.data) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        alert("Login successful!");
-        
+        toast.success("Login successful!");
+
         const redirectPath = location.state?.from || "/dashboard";
-        navigate(redirectPath);
+        setTimeout(() => navigate(redirectPath), 1000);
       }
     } catch (err) {
       console.error(err);
@@ -59,7 +60,6 @@ const Login = () => {
           Login to your <span className="brand-name">MoneyMate</span> account
         </p>
 
-        {/* Info banner for redirect notice */}
         {infoMessage && (
           <div
             style={{

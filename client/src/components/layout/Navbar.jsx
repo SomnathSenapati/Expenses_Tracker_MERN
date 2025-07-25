@@ -1,5 +1,7 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,7 +32,8 @@ const Navbar = () => {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUserName("");
-    navigate("/login");
+    toast.success("Logged out successfully!");
+    setTimeout(() => navigate("/login"), 1000);
   };
 
   return (
@@ -94,7 +97,6 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            {/* Add Income and Add Expense Buttons */}
             <div
               className="action-buttons"
               style={{ display: "flex", gap: "10px", marginRight: "20px" }}

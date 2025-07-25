@@ -97,7 +97,6 @@ const Dashboard = () => {
         Income & Expenses for {months[selectedMonth]} {selectedYear}
       </p>
 
-      {/* Month & Year Select */}
       <div className="month-year-filter">
         <select
           value={selectedMonth}
@@ -122,7 +121,6 @@ const Dashboard = () => {
         </select>
       </div>
 
-      {/* Income/Expense/Balance Cards */}
       <div className="dashboard-cards">
         <div className="card">
           <h3>Total Income</h3>
@@ -167,7 +165,6 @@ const Dashboard = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* View Transactions Button */}
       <button
         className="view-transaction-btn"
         onClick={() => navigate("/list")}

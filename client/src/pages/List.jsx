@@ -296,7 +296,6 @@ const List = () => {
         </select>
       </div>
 
-      {/* Table */}
       <div className="transactions">
         <h4>Filtered Transactions</h4>
         <button
