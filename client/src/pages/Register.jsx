@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -14,7 +16,6 @@ const Register = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -22,10 +23,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
 
@@ -39,12 +39,12 @@ const Register = () => {
       });
 
       if (res.status === 201 || res.status === 200) {
-        alert("Registration successful!");
-        navigate("/login");
+        toast.success("Registration successful!");
+        setTimeout(() => navigate("/OtpVerify"), 1500);
       }
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Something went wrong.");
+      toast.error(err.response?.data?.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -52,14 +52,13 @@ const Register = () => {
 
   return (
     <div className="register-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Create Account</h2>
         <p>
           Join <span className="brand-name">MoneyMate</span> and track your
           expenses smarter.
         </p>
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className="form-group">
           <label>Name</label>
@@ -138,4 +137,3 @@ const Register = () => {
 };
 
 export default Register;
- 

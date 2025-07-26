@@ -20,6 +20,9 @@ import List from "../pages/List";
 import ServiceDetails from "../pages/ServiceDetails";
 import Suggestions from "../pages/Suggestions";
 import EditTransaction from "../pages/EditTransaction";
+import VerifyEmail from "../pages/VerifyEmail";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
 
 const Routing = () => {
   return (
@@ -30,13 +33,15 @@ const Routing = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/OtpVerify" element={<VerifyEmail />} />
           <Route path="/register" element={<Register />} />
           <Route path="/services" element={<Services />} />
           <Route path="/features" element={<Features />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
-
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/list" element={<List />} />
           <Route path="/suggestion/" element={<Suggestions />} />
 

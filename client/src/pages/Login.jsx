@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -98,6 +98,14 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
           />
+          <div style={{ marginTop: "5px", textAlign: "right" }}>
+            <Link
+              to="/forgot-password"
+              style={{ fontSize: "14px", color: "#007bff" }}
+            >
+              Forgot Password?
+            </Link>
+          </div>
         </div>
 
         <button

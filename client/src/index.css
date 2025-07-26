@@ -1342,3 +1342,46 @@ ul {
         transform: translateY(-15px);
     }
 }
+
+/* otp verify */
+.otp-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #073a42;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.otp-form .form-group {
+    margin-bottom: 15px;
+}
+
+.otp-form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* forgot/reset pass */
