@@ -1385,3 +1385,83 @@ ul {
 }
 
 /* forgot/reset pass */
+/* Shared Form Styling */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #2b867d;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.auth-form p {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Toast overrides */
+.Toastify__toast {
+    font-size: 14px;
+}
+
+/* Optional: responsive tweak */
+@media (max-width: 500px) {
+    .auth-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}

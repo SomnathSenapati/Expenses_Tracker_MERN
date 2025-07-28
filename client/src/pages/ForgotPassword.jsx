@@ -41,9 +41,9 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="forgot-container">
+    <div className="auth-container">
       <ToastContainer />
-      <form onSubmit={handleSubmit} className="forgot-form">
+      <form onSubmit={handleSubmit} className="auth-form">
         <h2>Forgot Password</h2>
         <p>Enter your registered email to receive OTP</p>
 

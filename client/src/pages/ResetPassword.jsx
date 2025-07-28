@@ -45,9 +45,9 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-container">
+    <div className="auth-container">
       <ToastContainer />
-      <form onSubmit={handleSubmit} className="reset-form">
+      <form onSubmit={handleSubmit} className="auth-form">
         <h2>Reset Password</h2>
         <p>Enter the OTP and your new password.</p>
 
